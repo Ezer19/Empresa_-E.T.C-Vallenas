@@ -292,7 +292,7 @@ Este software es propiedad exclusiva de ETC Vallenas y está protegido por leyes
 
 <div align="center">
   <p>
-    <strong>Desarrollado con ❤️ por</strong><br>
+    <strong>Desarrollado por</strong><br>
     <a href="https://www.instagram.com/ezerzuniga.oficial16/">
       <strong>Ezer B. Zuñiga Chura</strong>
     </a>
