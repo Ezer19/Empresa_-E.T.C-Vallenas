@@ -1,4 +1,4 @@
-# 🚛 ETC Vallenas - Sistema de Gestión de Maquinaria Pesada
+#  ETC Vallenas - Sistema de Gestión de Maquinaria Pesada
 
 <div align="center">
   <img src="public/assets/images/logo.png" alt="ETC Vallenas Logo" width="200"/>
@@ -20,37 +20,37 @@ Sistema integral de gestión para **ETC Vallenas**, empresa líder en alquiler d
 - **Dashboard Administrativo**: Panel completo de estadísticas y gestión
 - **Responsive**: Diseño adaptativo para dispositivos móviles
 
-## ✨ Características Principales
+## Características Principales
 
 ### Frontend
-- ✅ Diseño moderno con **Tailwind CSS** y **Bootstrap 5**
-- ✅ Interfaz responsive y accesible (WCAG 2.1)
-- ✅ Carrusel de imágenes con hero section
-- ✅ Formularios de contacto y cotización
-- ✅ Blog de noticias del sector
-- ✅ SEO optimizado con meta tags completos
-- ✅ PWA (Progressive Web App) ready
-- ✅ Iconos Font Awesome 6
+- Diseño moderno con **Tailwind CSS** y **Bootstrap 5**
+- Interfaz responsive y accesible (WCAG 2.1)
+- Carrusel de imágenes con hero section
+- Formularios de contacto y cotización
+- Blog de noticias del sector
+- SEO optimizado con meta tags completos
+- PWA (Progressive Web App) ready
+- Iconos Font Awesome 6
 
 ### Backend
-- ✅ Laravel 10 con arquitectura MVC
-- ✅ MongoDB para base de datos NoSQL
-- ✅ Sistema de autenticación robusto
-- ✅ Roles y permisos (Admin, Operador, Cliente)
-- ✅ API RESTful para integraciones
-- ✅ Gestión de archivos e imágenes
-- ✅ Sistema de notificaciones
-- ✅ Reportes y estadísticas
+- Laravel 10 con arquitectura MVC
+- MongoDB para base de datos NoSQL
+- Sistema de autenticación robusto
+- Roles y permisos (Admin, Operador, Cliente)
+- API RESTful para integraciones
+- Gestión de archivos e imágenes
+- Sistema de notificaciones
+- Reportes y estadísticas
 
 ### Seguridad
-- 🔒 Autenticación con Laravel Sanctum
-- 🔒 CSRF Protection
-- 🔒 Rate Limiting
-- 🔒 Validación de datos
-- 🔒 Headers de seguridad
-- 🔒 Encriptación de contraseñas
+- Autenticación con Laravel Sanctum
+- CSRF Protection
+- Rate Limiting
+- Validación de datos
+- Headers de seguridad
+- Encriptación de contraseñas
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 | Categoría | Tecnologías |
 |-----------|-------------|
@@ -62,7 +62,7 @@ Sistema integral de gestión para **ETC Vallenas**, empresa líder en alquiler d
 | **CSS Framework** | TailwindCSS + Bootstrap 5 |
 | **Iconos** | Font Awesome 6 |
 
-## 📦 Instalación
+## Instalación
 
 ### Requisitos Previos
 
@@ -124,7 +124,7 @@ npm run dev
 http://localhost:8000
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 etc-vallenas-web/
@@ -168,7 +168,7 @@ etc-vallenas-web/
 └── README.md                 # Este archivo
 ```
 
-## 🎨 Paleta de Colores
+## Paleta de Colores
 
 ```css
 --primary-color: #1565C0    /* Azul corporativo */
@@ -179,7 +179,7 @@ etc-vallenas-web/
 --warning-color: #FFC107    /* Amarillo */
 ```
 
-## 👥 Roles de Usuario
+## Roles de Usuario
 
 | Rol | Descripción | Permisos |
 |-----|-------------|----------|
@@ -188,7 +188,7 @@ etc-vallenas-web/
 | **Operador** | Operador de maquinaria | Registro de mantenimiento y operaciones |
 | **Cliente** | Cliente registrado | Solicitar cotizaciones y ver proyectos |
 
-## 📊 Módulos del Sistema
+## Módulos del Sistema
 
 ### 1. Gestión de Maquinaria
 - Catálogo completo de equipos
@@ -218,37 +218,37 @@ etc-vallenas-web/
 - Reportes y exportación
 - Logs de actividad
 
-## 🔒 Seguridad
+## Seguridad
 
-- ✅ Autenticación de dos factores (2FA)
-- ✅ Roles y permisos granulares
-- ✅ Encriptación de datos sensibles
-- ✅ Auditoría de acciones
-- ✅ Backups automáticos
-- ✅ Protección CSRF/XSS
-- ✅ Rate limiting API
+- Autenticación de dos factores (2FA)
+- Roles y permisos granulares
+- Encriptación de datos sensibles
+- Auditoría de acciones
+- Backups automáticos
+- Protección CSRF/XSS
+- Rate limiting API
 
-## 📱 Características PWA
+## Características PWA
 
-- ✅ Instalable en dispositivos
-- ✅ Funciona offline (básico)
-- ✅ Notificaciones push
-- ✅ Actualizaciones automáticas
-- ✅ Icono de aplicación
+- Instalable en dispositivos
+- Funciona offline (básico)
+- Notificaciones push
+- Actualizaciones automáticas
+- Icono de aplicación
 
-## 🌐 SEO y Performance
+## SEO y Performance
 
-- ✅ Meta tags completos
-- ✅ Structured Data (Schema.org)
-- ✅ Sitemap XML
-- ✅ Robots.txt
-- ✅ Open Graph Protocol
-- ✅ Twitter Cards
-- ✅ Imágenes optimizadas
-- ✅ Lazy loading
-- ✅ Cache de assets
+- Meta tags completos
+- Structured Data (Schema.org)
+- Sitemap XML
+- Robots.txt
+- Open Graph Protocol
+- Twitter Cards
+- Imágenes optimizadas
+- Lazy loading
+- Cache de assets
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Ejecutar tests unitarios
@@ -261,7 +261,7 @@ php artisan test --coverage
 php artisan test --filter=UsuarioTest
 ```
 
-## 📝 Scripts Disponibles
+## Scripts Disponibles
 
 ```json
 {
@@ -272,7 +272,7 @@ php artisan test --filter=UsuarioTest
 }
 ```
 
-## 🤝 Contribución
+## Contribución
 
 Este es un proyecto privado de **ETC Vallenas**. Para contribuir:
 
@@ -281,14 +281,14 @@ Este es un proyecto privado de **ETC Vallenas**. Para contribuir:
 3. Seguir los lineamientos de código
 4. Crear pull requests descriptivos
 
-## 📄 Licencia
+## Licencia
 
 **Propietario**: ETC Vallenas  
 **Copyright**: © 2025 E.T.C. Vallenas - Todos los derechos reservados
 
 Este software es propiedad exclusiva de ETC Vallenas y está protegido por leyes de derechos de autor.
 
-## 👨‍💻 Desarrollador
+## Desarrollador
 
 <div align="center">
   <p>
@@ -298,20 +298,20 @@ Este software es propiedad exclusiva de ETC Vallenas y está protegido por leyes
     </a>
   </p>
   <p>
-    📧 Email: ezerzuniga.dev@gmail.com<br>
+    Email: ezerzuniga.dev@gmail.com<br>
     📱 Instagram: @ezerzuniga.oficial16
   </p>
 </div>
 
 ## 📞 Contacto ETC Vallenas
 
-- 🌐 **Web**: https://www.etcvallenas.com
-- 📧 **Email**: vallenasfernando43@gmail.com
-- 📱 **Teléfono**: +51 984 123 456
-- 📍 **Dirección**: Av. Los Incas 123, Cusco, Perú
-- 🕐 **Horario**: Lun-Vie 8:00-18:00
+- **Web**: https://www.etcvallenas.com
+- **Email**: vallenasfernando43@gmail.com
+- **Teléfono**: +51 984 123 456
+- **Dirección**: Av. Los Incas 123, Cusco, Perú
+- **Horario**: Lun-Vie 8:00-18:00
 
-## 🚀 Roadmap
+## Roadmap
 
 ### Versión 1.0 (Actual)
 - [x] Sistema de autenticación
@@ -337,5 +337,5 @@ Este software es propiedad exclusiva de ETC Vallenas y está protegido por leyes
 
 <div align="center">
   <p><strong>ETC Vallenas - Construyendo el futuro del Perú</strong></p>
-  <p>⭐ Si este proyecto te fue útil, considera darle una estrella en GitHub</p>
+  <p> Si este proyecto te fue útil, considera darle una estrella en GitHub</p>
 </div>
