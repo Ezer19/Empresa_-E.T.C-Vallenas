@@ -9,16 +9,16 @@
   [![License](https://img.shields.io/badge/License-Proprietary-yellow.svg)](LICENSE)
 </div>
 
-## 📋 Descripción
+## Descripción
 
 Sistema integral de gestión para **ETC Vallenas**, empresa líder en alquiler de maquinaria pesada con más de 15 años de experiencia en Cusco, Perú. Este sistema permite gestionar:
 
-- 🏗️ **Maquinaria**: Catálogo completo de 85+ equipos disponibles
-- 📊 **Proyectos**: Gestión de proyectos de construcción y minería
-- 👥 **Clientes**: Base de datos de clientes y cotizaciones
-- 🔧 **Servicios**: Alquiler, mantenimiento, construcción y transporte
-- 📈 **Dashboard Administrativo**: Panel completo de estadísticas y gestión
-- 📱 **Responsive**: Diseño adaptativo para dispositivos móviles
+- **Maquinaria**: Catálogo completo de 85+ equipos disponibles
+- **Proyectos**: Gestión de proyectos de construcción y minería
+- **Clientes**: Base de datos de clientes y cotizaciones
+- **Servicios**: Alquiler, mantenimiento, construcción y transporte
+- **Dashboard Administrativo**: Panel completo de estadísticas y gestión
+- **Responsive**: Diseño adaptativo para dispositivos móviles
 
 ## ✨ Características Principales
 
