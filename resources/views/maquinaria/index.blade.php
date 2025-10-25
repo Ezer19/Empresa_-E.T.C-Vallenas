@@ -4,26 +4,22 @@
 @section('description', 'Explora nuestro amplio catálogo de más de 85 equipos de maquinaria pesada disponibles para alquiler en Cusco, Perú.')
 
 @section('content')
-<!-- Hero Section -->
-<section class="hero-section py-5">
+<section class="py-5 bg-gradient-primary text-white">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <h1 class="display-4 fw-bold mb-3 text-white">Nuestra Maquinaria</h1>
-                <p class="lead text-white mb-0">
-                    Más de 85 equipos de última generación disponibles para tu proyecto
-                </p>
+                <h1 class="display-5 fw-bold mb-3">Nuestra Maquinaria</h1>
+                <p class="lead mb-0">Más de 85 equipos de última generación disponibles para tu proyecto</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <div class="bg-white p-3 rounded shadow d-inline-block">
-                    <i class="fas fa-truck-monster text-primary" style="font-size: 3rem;"></i>
+                <div class="bg-white p-4 rounded-3 shadow d-inline-block">
+                    <i class="fas fa-truck-monster text-primary fa-3x"></i>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Filtros y Búsqueda -->
 <section class="py-4 bg-light">
     <div class="container">
         <form action="{{ route('maquinaria.index') }}" method="GET">
@@ -48,15 +44,9 @@
                 <div class="col-lg-3 col-md-6">
                     <select name="disponibilidad" class="form-select">
                         <option value="">Todas las disponibilidades</option>
-                        <option value="disponible" {{ request('disponibilidad') == 'disponible' ? 'selected' : '' }}>
-                            Disponible
-                        </option>
-                        <option value="en_uso" {{ request('disponibilidad') == 'en_uso' ? 'selected' : '' }}>
-                            En uso
-                        </option>
-                        <option value="mantenimiento" {{ request('disponibilidad') == 'mantenimiento' ? 'selected' : '' }}>
-                            Mantenimiento
-                        </option>
+                        <option value="disponible" {{ request('disponibilidad') == 'disponible' ? 'selected' : '' }}>Disponible</option>
+                        <option value="en_uso" {{ request('disponibilidad') == 'en_uso' ? 'selected' : '' }}>En uso</option>
+                        <option value="mantenimiento" {{ request('disponibilidad') == 'mantenimiento' ? 'selected' : '' }}>Mantenimiento</option>
                     </select>
                 </div>
                 <div class="col-lg-2 col-md-6">
@@ -69,29 +59,26 @@
     </div>
 </section>
 
-<!-- Listado de Maquinaria -->
-<section class="section-padding">
+<section class="py-5">
     <div class="container">
         @if($maquinaria->count() > 0)
         <div class="row g-4">
             @foreach($maquinaria as $equipo)
-            <div class="col-lg-4 col-md-6">
-                <div class="card border-0 shadow h-100 hover-shadow">
-                    <!-- Imagen -->
+            <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow h-100 transition-all">
                     <div class="position-relative">
                         @if($equipo->imagenes && count($equipo->imagenes) > 0)
-                        <img src="{{ asset('storage/maquinaria/' . $equipo->imagenes[0]) }}" 
+                        <img src="{{ Storage::url('maquinaria/' . $equipo->imagenes[0]) }}" 
                              class="card-img-top" 
                              alt="{{ $equipo->nombre }}"
                              style="height: 250px; object-fit: cover;">
                         @else
-                        <img src="{{ asset('assets/images/maquinaria-placeholder.jpg') }}" 
-                             class="card-img-top" 
-                             alt="{{ $equipo->nombre }}"
-                             style="height: 250px; object-fit: cover;">
+                        <div class="bg-primary text-white d-flex align-items-center justify-content-center" 
+                             style="height: 250px;">
+                            <i class="fas fa-truck-monster fa-5x opacity-25"></i>
+                        </div>
                         @endif
                         
-                        <!-- Badge de disponibilidad -->
                         <span class="position-absolute top-0 end-0 m-3">
                             @if($equipo->disponibilidad == 'disponible')
                             <span class="badge bg-success">Disponible</span>
@@ -103,21 +90,17 @@
                         </span>
                     </div>
                     
-                    <div class="card-body">
-                        <!-- Categoría -->
+                    <div class="card-body p-4">
                         <span class="badge bg-primary mb-2">{{ ucfirst($equipo->tipo) }}</span>
                         
-                        <!-- Nombre -->
                         <h5 class="card-title fw-bold mb-2">{{ $equipo->nombre }}</h5>
                         
-                        <!-- Marca y Modelo -->
                         <p class="text-muted mb-3">
                             <i class="fas fa-industry me-1"></i>{{ $equipo->marca }} 
                             <span class="mx-2">|</span>
                             <i class="fas fa-tag me-1"></i>{{ $equipo->modelo }}
                         </p>
                         
-                        <!-- Especificaciones -->
                         <div class="mb-3">
                             <small class="text-muted d-block">
                                 <i class="fas fa-calendar me-1"></i>Año: {{ $equipo->año }}
@@ -129,7 +112,6 @@
                             @endif
                         </div>
                         
-                        <!-- Precio -->
                         @if($equipo->tarifa_dia)
                         <div class="mb-3">
                             <p class="mb-0 fw-bold text-primary">
@@ -138,8 +120,7 @@
                         </div>
                         @endif
                         
-                        <!-- Botón -->
-                        <a href="{{ route('maquinaria.show', $equipo->_id) }}" class="btn btn-outline-primary w-100">
+                        <a href="{{ route('maquinaria.show', $equipo->id) }}" class="btn btn-outline-primary w-100">
                             <i class="fas fa-eye me-2"></i>Ver Detalles
                         </a>
                     </div>
@@ -148,17 +129,15 @@
             @endforeach
         </div>
         
-        <!-- Paginación -->
         <div class="mt-5 d-flex justify-content-center">
             {{ $maquinaria->links() }}
         </div>
         
         @else
-        <!-- Sin resultados -->
         <div class="text-center py-5">
-            <i class="fas fa-search text-muted" style="font-size: 4rem;"></i>
-            <h3 class="mt-3">No se encontraron resultados</h3>
-            <p class="text-muted">Intenta con otros criterios de búsqueda</p>
+            <i class="fas fa-search fa-4x text-muted mb-3"></i>
+            <h3 class="mb-3">No se encontraron resultados</h3>
+            <p class="text-muted mb-4">Intenta con otros criterios de búsqueda</p>
             <a href="{{ route('maquinaria.index') }}" class="btn btn-primary">
                 <i class="fas fa-redo me-2"></i>Ver Todo
             </a>
@@ -167,18 +146,15 @@
     </div>
 </section>
 
-<!-- Call to Action -->
-<section class="section-padding bg-primary text-white">
+<section class="py-5 bg-primary text-white">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <h2 class="fw-bold mb-3">¿No encuentras lo que buscas?</h2>
-                <p class="mb-0">
-                    Contáctanos y te ayudaremos a encontrar el equipo perfecto para tu proyecto
-                </p>
+                <h2 class="h1 fw-bold mb-3">¿No encuentras lo que buscas?</h2>
+                <p class="lead mb-0">Contáctanos y te ayudaremos a encontrar el equipo perfecto para tu proyecto</p>
             </div>
-            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                <a href="{{ route('contacto.index') }}" class="btn btn-light btn-lg">
+            <div class="col-lg-4 text-lg-end">
+                <a href="{{ route('contacto.index') }}" class="btn btn-light btn-lg px-4 py-3 fw-semibold">
                     <i class="fas fa-envelope me-2"></i>Contáctanos
                 </a>
             </div>

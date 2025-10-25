@@ -5,9 +5,6 @@ use App\Models\Servicio;
 
 class ServiciosSeeder extends Seeder
 {
-    /**
-     * Ejecutar el seeder de servicios.
-     */
     public function run(): void
     {
         $servicios = [

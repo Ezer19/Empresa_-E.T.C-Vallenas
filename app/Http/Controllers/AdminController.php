@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-
     public function index()
     {
         $stats = [
@@ -24,12 +23,10 @@ class AdminController extends Controller
             'total_servicios' => Servicio::count(),
         ];
 
-        // Proyectos recientes
         $proyectos_recientes = Proyecto::orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
 
-        // Maquinaria que necesita mantenimiento
         $mantenimiento_pendiente = Maquinaria::where('proxima_mantenimiento', '<=', now()->addDays(7))
             ->get();
 
@@ -69,7 +66,6 @@ class AdminController extends Controller
         $fecha_inicio = $request->input('fecha_inicio', now()->subMonth());
         $fecha_fin = $request->input('fecha_fin', now());
 
-        // Estadísticas del período
         $stats_periodo = [
             'proyectos_nuevos' => Proyecto::whereBetween('created_at', [$fecha_inicio, $fecha_fin])->count(),
             'ingresos_estimados' => Proyecto::whereBetween('created_at', [$fecha_inicio, $fecha_fin])
@@ -81,4 +77,4 @@ class AdminController extends Controller
 
         return view('admin.reportes', compact('stats_periodo', 'fecha_inicio', 'fecha_fin'));
     }
-}
+} 

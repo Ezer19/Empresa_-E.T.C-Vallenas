@@ -3,7 +3,6 @@
 @section('title', 'Mi Perfil - ETC Vallenas')
 
 @section('content')
-<!-- Header Section -->
 <section class="py-4 bg-light">
     <div class="container">
         <h1 class="h3 fw-bold mb-0">Mi Perfil</h1>
@@ -11,7 +10,6 @@
     </div>
 </section>
 
-<!-- Perfil Content -->
 <section class="section-padding">
     <div class="container">
         @if(session('success'))
@@ -22,7 +20,6 @@
         @endif
         
         <div class="row g-4">
-            <!-- Información del Perfil -->
             <div class="col-lg-4">
                 <div class="card border-0 shadow">
                     <div class="card-body text-center p-4">
@@ -42,7 +39,7 @@
                             <p class="mb-2">
                                 <i class="fas fa-phone text-primary me-2"></i>
                                 <strong>Teléfono:</strong><br>
-                                <span class="text-muted">{{ Auth::user()->telefono }}</span>
+                                <span class="text-muted">{{ Auth::user()->telefono ?? 'No especificado' }}</span>
                             </p>
                             @if(Auth::user()->empresa)
                             <p class="mb-2">
@@ -54,24 +51,19 @@
                             <p class="mb-0">
                                 <i class="fas fa-calendar text-primary me-2"></i>
                                 <strong>Miembro desde:</strong><br>
-                                <span class="text-muted">
-                                    {{ \Carbon\Carbon::parse(Auth::user()->created_at)->format('d/m/Y') }}
-                                </span>
+                                <span class="text-muted">{{ Auth::user()->created_at->format('d/m/Y') }}</span>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Formulario de Edición -->
             <div class="col-lg-8">
                 <div class="card border-0 shadow">
                     <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4">
-                            <i class="fas fa-edit me-2"></i>Editar Información Personal
-                        </h5>
+                        <h5 class="fw-bold mb-4"><i class="fas fa-edit me-2"></i>Editar Información</h5>
                         
-                        <form action="{{ route('usuario.perfil.update') }}" method="POST">
+                        <form action="{{ route('usuario.actualizar-perfil') }}" method="POST">
                             @csrf
                             @method('PUT')
                             
@@ -113,18 +105,17 @@
                                 </div>
                                 
                                 <div class="col-md-6">
-                                    <label class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                    <label class="form-label">Teléfono</label>
                                     <input type="tel" 
                                            name="telefono" 
                                            class="form-control @error('telefono') is-invalid @enderror" 
-                                           value="{{ old('telefono', Auth::user()->telefono) }}"
-                                           required>
+                                           value="{{ old('telefono', Auth::user()->telefono) }}">
                                     @error('telefono')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <label class="form-label">Empresa</label>
                                     <input type="text" 
                                            name="empresa" 
@@ -132,17 +123,18 @@
                                            value="{{ old('empresa', Auth::user()->empresa) }}">
                                 </div>
                                 
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <hr>
                                     <h6 class="fw-bold mb-3">Cambiar Contraseña</h6>
-                                    <p class="text-muted small">Deja estos campos en blanco si no deseas cambiar tu contraseña</p>
+                                    <p class="text-muted small mb-3">Deja en blanco si no deseas cambiar la contraseña</p>
                                 </div>
                                 
                                 <div class="col-md-6">
                                     <label class="form-label">Nueva Contraseña</label>
                                     <input type="password" 
                                            name="password" 
-                                           class="form-control @error('password') is-invalid @enderror">
+                                           class="form-control @error('password') is-invalid @enderror"
+                                           placeholder="Mínimo 8 caracteres">
                                     @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -152,16 +144,17 @@
                                     <label class="form-label">Confirmar Contraseña</label>
                                     <input type="password" 
                                            name="password_confirmation" 
-                                           class="form-control">
+                                           class="form-control"
+                                           placeholder="Repite la nueva contraseña">
                                 </div>
                                 
-                                <div class="col-md-12">
-                                    <div class="d-flex gap-2">
-                                        <button type="submit" class="btn btn-primary">
+                                <div class="col-12">
+                                    <div class="d-flex gap-2 pt-2">
+                                        <button type="submit" class="btn btn-primary px-4">
                                             <i class="fas fa-save me-2"></i>Guardar Cambios
                                         </button>
                                         <a href="{{ route('usuario.dashboard') }}" class="btn btn-outline-secondary">
-                                            <i class="fas fa-times me-2"></i>Cancelar
+                                            <i class="fas fa-arrow-left me-2"></i>Volver
                                         </a>
                                     </div>
                                 </div>

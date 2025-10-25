@@ -8,49 +8,36 @@ use Illuminate\Support\Facades\Storage;
 
 class MaquinariaController extends Controller
 {
-    /**
-     * Mostrar listado de maquinaria
-     */
     public function index(Request $request)
     {
         $query = Maquinaria::query();
 
-        // Filtrar por tipo
         if ($request->has('tipo') && $request->tipo) {
             $query->where('tipo', $request->tipo);
         }
 
-        // Filtrar por disponibilidad
         if ($request->has('disponibilidad') && $request->disponibilidad) {
             $query->where('disponibilidad', $request->disponibilidad);
         }
 
-        // Buscar por nombre
         if ($request->has('buscar') && $request->buscar) {
             $query->where('nombre', 'like', '%' . $request->buscar . '%');
         }
 
-        // Ordenar
         $ordenar = $request->get('ordenar', 'nombre');
         $direccion = $request->get('direccion', 'asc');
         $query->orderBy($ordenar, $direccion);
 
         $maquinaria = $query->paginate(12);
-        
-        // Obtener tipos únicos para el filtro
         $tipos = Maquinaria::distinct('tipo')->pluck('tipo');
 
         return view('maquinaria.index', compact('maquinaria', 'tipos'));
     }
 
-    /**
-     * Mostrar detalle de maquinaria
-     */
     public function show($id)
     {
         $maquinaria = Maquinaria::findOrFail($id);
         
-        // Maquinaria relacionada del mismo tipo
         $relacionadas = Maquinaria::where('tipo', $maquinaria->tipo)
             ->where('_id', '!=', $id)
             ->where('disponibilidad', 'disponible')
@@ -60,9 +47,6 @@ class MaquinariaController extends Controller
         return view('maquinaria.detalle', compact('maquinaria', 'relacionadas'));
     }
 
-    /**
-     * Crear nueva maquinaria (Admin)
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -85,7 +69,6 @@ class MaquinariaController extends Controller
             'imagenes.*.max' => 'Las imágenes no deben superar 5MB',
         ]);
 
-        // Generar código único
         $codigo = 'MAQ-' . strtoupper(substr($request->tipo, 0, 3)) . '-' . str_pad(Maquinaria::count() + 1, 4, '0', STR_PAD_LEFT);
 
         $data = $request->except('imagenes');
@@ -93,7 +76,6 @@ class MaquinariaController extends Controller
         $data['estado'] = $data['estado'] ?? 'operativo';
         $data['disponibilidad'] = $data['disponibilidad'] ?? 'disponible';
 
-        // Procesar imágenes
         if ($request->hasFile('imagenes')) {
             $imagenes = [];
             foreach ($request->file('imagenes') as $imagen) {
@@ -109,9 +91,6 @@ class MaquinariaController extends Controller
             ->with('success', 'Maquinaria creada exitosamente.');
     }
 
-    /**
-     * Actualizar maquinaria (Admin)
-     */
     public function update(Request $request, $id)
     {
         $maquinaria = Maquinaria::findOrFail($id);
@@ -125,7 +104,6 @@ class MaquinariaController extends Controller
 
         $data = $request->except('imagenes');
 
-        // Procesar nuevas imágenes si se suben
         if ($request->hasFile('imagenes')) {
             $imagenes = $maquinaria->imagenes ?? [];
             foreach ($request->file('imagenes') as $imagen) {
@@ -141,14 +119,10 @@ class MaquinariaController extends Controller
             ->with('success', 'Maquinaria actualizada exitosamente.');
     }
 
-    /**
-     * Eliminar maquinaria (Admin)
-     */
     public function destroy($id)
     {
         $maquinaria = Maquinaria::findOrFail($id);
 
-        // Eliminar imágenes del storage
         if ($maquinaria->imagenes) {
             foreach ($maquinaria->imagenes as $imagen) {
                 Storage::disk('public')->delete('maquinaria/' . $imagen);

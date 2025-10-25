@@ -8,14 +8,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Mostrar dashboard del usuario
-     */
     public function dashboard()
     {
         $usuario = auth()->user();
         
-        // Estadísticas del usuario
         $stats = [
             'proyectos_asignados' => $usuario->proyectos()->count(),
             'proyectos_activos' => $usuario->proyectos()->where('estado', 'en_progreso')->count(),
@@ -24,18 +20,12 @@ class UsuarioController extends Controller
         return view('usuarios.dashboard', compact('usuario', 'stats'));
     }
 
-    /**
-     * Mostrar perfil del usuario
-     */
     public function perfil()
     {
         $usuario = auth()->user();
         return view('usuarios.perfil', compact('usuario'));
     }
 
-    /**
-     * Actualizar perfil
-     */
     public function actualizarPerfil(Request $request)
     {
         $usuario = auth()->user();
@@ -56,7 +46,6 @@ class UsuarioController extends Controller
 
         $data = $request->only(['nombre', 'apellido', 'telefono', 'empresa', 'cargo']);
 
-        // Procesar avatar si se sube
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
             $filename = time() . '_' . $usuario->_id . '.' . $avatar->extension();
@@ -69,9 +58,6 @@ class UsuarioController extends Controller
         return back()->with('success', 'Perfil actualizado exitosamente.');
     }
 
-    /**
-     * Cambiar contraseña
-     */
     public function cambiarPassword(Request $request)
     {
         $request->validate([
@@ -86,7 +72,6 @@ class UsuarioController extends Controller
 
         $usuario = auth()->user();
 
-        // Verificar contraseña actual
         if (!Hash::check($request->password_actual, $usuario->password)) {
             return back()->withErrors(['password_actual' => 'La contraseña actual es incorrecta']);
         }
@@ -98,18 +83,12 @@ class UsuarioController extends Controller
         return back()->with('success', 'Contraseña actualizada exitosamente.');
     }
 
-    /**
-     * Configuración del usuario
-     */
     public function configuracion()
     {
         $usuario = auth()->user();
         return view('usuarios.configuracion', compact('usuario'));
     }
 
-    /**
-     * Actualizar configuración
-     */
     public function actualizarConfiguracion(Request $request)
     {
         $usuario = auth()->user();
@@ -128,19 +107,14 @@ class UsuarioController extends Controller
         return back()->with('success', 'Configuración actualizada exitosamente.');
     }
 
-    /**
-     * Gestión de usuarios (Admin)
-     */
     public function index(Request $request)
     {
         $query = Usuario::query();
 
-        // Filtrar por rol
         if ($request->has('rol') && $request->rol) {
             $query->where('rol', $request->rol);
         }
 
-        // Buscar
         if ($request->has('buscar') && $request->buscar) {
             $buscar = $request->buscar;
             $query->where(function($q) use ($buscar) {
@@ -155,9 +129,6 @@ class UsuarioController extends Controller
         return view('admin.gestion-usuarios', compact('usuarios'));
     }
 
-    /**
-     * Actualizar usuario (Admin)
-     */
     public function update(Request $request, $id)
     {
         $usuario = Usuario::findOrFail($id);
@@ -175,14 +146,10 @@ class UsuarioController extends Controller
         return back()->with('success', 'Usuario actualizado exitosamente.');
     }
 
-    /**
-     * Eliminar usuario (Admin)
-     */
     public function destroy($id)
     {
         $usuario = Usuario::findOrFail($id);
         
-        // No permitir eliminar al usuario actual
         if ($usuario->_id == auth()->id()) {
             return back()->withErrors(['error' => 'No puedes eliminar tu propia cuenta.']);
         }

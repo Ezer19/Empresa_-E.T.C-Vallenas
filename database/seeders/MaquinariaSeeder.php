@@ -5,13 +5,9 @@ use App\Models\Maquinaria;
 
 class MaquinariaSeeder extends Seeder
 {
-    /**
-     * Ejecutar el seeder de maquinaria.
-     */
     public function run(): void
     {
         $maquinaria = [
-            // Excavadoras
             [
                 'codigo' => 'MAQ-EXC-0001',
                 'nombre' => 'Excavadora Hidráulica CAT 320',
@@ -56,8 +52,6 @@ class MaquinariaSeeder extends Seeder
                 'caracteristicas' => ['Sistema ECO', 'Cámara 360°', 'Monitor LED', 'Sistema hidráulico avanzado'],
                 'imagenes' => ['excavadora-volvo-ec210.jpg'],
             ],
-            
-            // Cargadores
             [
                 'codigo' => 'MAQ-CAR-0001',
                 'nombre' => 'Cargador Frontal CAT 950',
@@ -80,8 +74,6 @@ class MaquinariaSeeder extends Seeder
                 'caracteristicas' => ['Cucharón estándar', 'Transmisión automática', 'Luces LED', 'Radio bidireccional'],
                 'imagenes' => ['cargador-cat-950.jpg'],
             ],
-            
-            // Volquetes
             [
                 'codigo' => 'MAQ-VOL-0001',
                 'nombre' => 'Volquete Volvo FM 440',
@@ -104,8 +96,6 @@ class MaquinariaSeeder extends Seeder
                 'caracteristicas' => ['Tolva reforzada', 'Sistema hidráulico', 'Frenos ABS', 'Cabina ergonómica'],
                 'imagenes' => ['volquete-volvo-fm440.jpg'],
             ],
-            
-            // Motoniveladoras
             [
                 'codigo' => 'MAQ-MOT-0001',
                 'nombre' => 'Motoniveladora CAT 140',
@@ -128,8 +118,6 @@ class MaquinariaSeeder extends Seeder
                 'caracteristicas' => ['Hoja de acero', 'Articulación central', 'Control preciso', 'Sistema GPS'],
                 'imagenes' => ['motoniveladora-cat-140.jpg'],
             ],
-            
-            // Compactadoras
             [
                 'codigo' => 'MAQ-COM-0001',
                 'nombre' => 'Rodillo Compactador Hamm 3411',
@@ -158,6 +146,6 @@ class MaquinariaSeeder extends Seeder
             Maquinaria::create($equipo);
         }
 
-        $this->command->info('✓ Maquinaria creada exitosamente');
+        $this->command->info('Maquinaria creada exitosamente');
     }
 }

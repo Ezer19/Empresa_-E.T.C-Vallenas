@@ -9,23 +9,20 @@
             <div class="col-md-5">
                 <div class="card shadow-lg border-0">
                     <div class="card-body p-5">
-                        <!-- Logo -->
                         <div class="text-center mb-4">
                             <img src="{{ asset('assets/images/logo.png') }}" alt="ETC Vallenas" height="60">
                             <h3 class="mt-3 fw-bold">Recuperar Contraseña</h3>
                             <p class="text-muted">Te enviaremos un enlace para restablecer tu contraseña</p>
                         </div>
 
-                        <!-- Mensaje de éxito -->
-                        @if(session('success'))
+                        @if(session('status'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <i class="fas fa-check-circle me-2"></i>
-                            {{ session('success') }}
+                            {{ session('status') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                         @endif
 
-                        <!-- Errores -->
                         @if($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <i class="fas fa-exclamation-circle me-2"></i>
@@ -38,11 +35,9 @@
                         </div>
                         @endif
 
-                        <!-- Formulario de Recuperación -->
-                        <form action="{{ route('recuperar') }}" method="POST">
+                        <form action="{{ route('password.email') }}" method="POST">
                             @csrf
                             
-                            <!-- Email -->
                             <div class="mb-4">
                                 <label for="email" class="form-label">
                                     <i class="fas fa-envelope me-1"></i>Correo Electrónico
@@ -63,7 +58,6 @@
                                 </div>
                             </div>
 
-                            <!-- Botón de Enviar -->
                             <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
                                 <i class="fas fa-paper-plane me-2"></i>Enviar Enlace de Recuperación
                             </button>
@@ -71,7 +65,6 @@
 
                         <hr class="my-4">
 
-                        <!-- Enlaces -->
                         <div class="text-center">
                             <p class="text-muted mb-2">
                                 ¿Recordaste tu contraseña? 
@@ -89,7 +82,6 @@
                     </div>
                 </div>
 
-                <!-- Volver al inicio -->
                 <div class="text-center mt-3">
                     <a href="{{ route('home') }}" class="text-white text-decoration-none">
                         <i class="fas fa-arrow-left me-2"></i>Volver al inicio

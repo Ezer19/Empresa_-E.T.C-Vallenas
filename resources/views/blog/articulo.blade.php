@@ -4,35 +4,20 @@
 @section('description', Str::limit($articulo->contenido ?? '', 160))
 
 @section('content')
-<!-- Header del Artículo -->
 <section class="py-5" style="background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center text-white">
-                <!-- Categoría -->
                 <span class="badge bg-warning text-dark mb-3 px-3 py-2">
                     <i class="fas fa-tag me-2"></i>{{ ucfirst($articulo->categoria ?? 'General') }}
                 </span>
-                
-                <!-- Título -->
                 <h1 class="display-5 fw-bold mb-3">{{ $articulo->titulo ?? 'Título del Artículo' }}</h1>
-                
-                <!-- Meta Información -->
                 <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap opacity-75">
-                    <span>
-                        <i class="fas fa-user me-2"></i>{{ $articulo->autor ?? 'ETC Vallenas' }}
-                    </span>
-                    <span>
-                        <i class="fas fa-calendar me-2"></i>
-                        {{ isset($articulo->fecha_publicacion) ? \Carbon\Carbon::parse($articulo->fecha_publicacion)->format('d/m/Y') : date('d/m/Y') }}
-                    </span>
-                    <span>
-                        <i class="fas fa-clock me-2"></i>{{ $articulo->tiempo_lectura ?? '5' }} min lectura
-                    </span>
+                    <span><i class="fas fa-user me-2"></i>{{ $articulo->autor ?? 'ETC Vallenas' }}</span>
+                    <span><i class="fas fa-calendar me-2"></i>{{ isset($articulo->fecha_publicacion) ? \Carbon\Carbon::parse($articulo->fecha_publicacion)->format('d/m/Y') : date('d/m/Y') }}</span>
+                    <span><i class="fas fa-clock me-2"></i>{{ $articulo->tiempo_lectura ?? '5' }} min lectura</span>
                     @if(isset($articulo->visitas))
-                    <span>
-                        <i class="fas fa-eye me-2"></i>{{ number_format($articulo->visitas) }} vistas
-                    </span>
+                    <span><i class="fas fa-eye me-2"></i>{{ number_format($articulo->visitas) }} vistas</span>
                     @endif
                 </div>
             </div>
@@ -40,12 +25,10 @@
     </div>
 </section>
 
-<!-- Contenido del Artículo -->
 <section class="section-padding">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <!-- Imagen Principal -->
                 @if(isset($articulo->imagen_principal))
                 <div class="mb-5">
                     <img src="{{ asset('storage/blog/' . $articulo->imagen_principal) }}" 
@@ -55,33 +38,24 @@
                 </div>
                 @endif
 
-                <!-- Contenido -->
                 <article class="blog-content">
                     {!! $articulo->contenido ?? '<p>Contenido del artículo...</p>' !!}
                 </article>
 
-                <!-- Tags -->
                 @if(isset($articulo->tags) && count($articulo->tags) > 0)
                 <div class="mt-5 pt-4 border-top">
-                    <h6 class="fw-bold mb-3">
-                        <i class="fas fa-tags me-2"></i>Etiquetas:
-                    </h6>
+                    <h6 class="fw-bold mb-3"><i class="fas fa-tags me-2"></i>Etiquetas:</h6>
                     <div class="d-flex gap-2 flex-wrap">
                         @foreach($articulo->tags as $tag)
                         <a href="{{ route('blog.index', ['tag' => $tag]) }}" 
-                           class="badge bg-light text-dark text-decoration-none border">
-                            #{{ $tag }}
-                        </a>
+                           class="badge bg-light text-dark text-decoration-none border">#{{ $tag }}</a>
                         @endforeach
                     </div>
                 </div>
                 @endif
 
-                <!-- Compartir en Redes Sociales -->
                 <div class="mt-4 pt-4 border-top">
-                    <h6 class="fw-bold mb-3">
-                        <i class="fas fa-share-alt me-2"></i>Compartir:
-                    </h6>
+                    <h6 class="fw-bold mb-3"><i class="fas fa-share-alt me-2"></i>Compartir:</h6>
                     <div class="d-flex gap-2">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
                            target="_blank"
@@ -106,7 +80,6 @@
                     </div>
                 </div>
 
-                <!-- Información del Autor -->
                 <div class="mt-5 p-4 bg-light rounded">
                     <div class="row align-items-center">
                         <div class="col-auto">
@@ -121,21 +94,14 @@
                                 {{ $articulo->autor_bio ?? 'Equipo de comunicaciones de ETC Vallenas, empresa líder en alquiler de maquinaria pesada en Cusco.' }}
                             </p>
                             <div class="d-flex gap-2">
-                                <a href="#" class="text-decoration-none text-primary">
-                                    <i class="fab fa-facebook"></i>
-                                </a>
-                                <a href="#" class="text-decoration-none text-info">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="text-decoration-none text-primary">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
+                                <a href="#" class="text-decoration-none text-primary"><i class="fab fa-facebook"></i></a>
+                                <a href="#" class="text-decoration-none text-info"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="text-decoration-none text-primary"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Navegación Anterior/Siguiente -->
                 <div class="mt-5 pt-4 border-top">
                     <div class="row g-3">
                         @if(isset($articulo_anterior))
@@ -168,14 +134,12 @@
                     </div>
                 </div>
 
-                <!-- Comentarios (Opcional) -->
                 <div class="mt-5 pt-5 border-top">
                     <h4 class="fw-bold mb-4">
                         <i class="fas fa-comments me-2"></i>Comentarios ({{ $articulo->comentarios_count ?? 0 }})
                     </h4>
 
                     @auth
-                    <!-- Formulario de Comentario -->
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
                             <form method="POST" action="{{ route('blog.comentario.store', $articulo->_id ?? 1) }}">
@@ -202,7 +166,6 @@
                     </div>
                     @endauth
 
-                    <!-- Lista de Comentarios -->
                     @if(isset($articulo->comentarios) && count($articulo->comentarios) > 0)
                     <div class="comentarios-list">
                         @foreach($articulo->comentarios as $comentario)
@@ -238,15 +201,11 @@
                 </div>
             </div>
 
-            <!-- Sidebar -->
             <div class="col-lg-4">
                 <div class="sticky-top" style="top: 20px;">
-                    <!-- Búsqueda -->
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
-                            <h6 class="fw-bold mb-3">
-                                <i class="fas fa-search me-2"></i>Buscar
-                            </h6>
+                            <h6 class="fw-bold mb-3"><i class="fas fa-search me-2"></i>Buscar</h6>
                             <form action="{{ route('blog.index') }}" method="GET">
                                 <div class="input-group">
                                     <input type="text" 
@@ -261,12 +220,9 @@
                         </div>
                     </div>
 
-                    <!-- Categorías -->
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
-                            <h6 class="fw-bold mb-3">
-                                <i class="fas fa-folder me-2"></i>Categorías
-                            </h6>
+                            <h6 class="fw-bold mb-3"><i class="fas fa-folder me-2"></i>Categorías</h6>
                             <div class="list-group list-group-flush">
                                 <a href="{{ route('blog.index', ['categoria' => 'noticias']) }}" 
                                    class="list-group-item list-group-item-action border-0 px-0">
@@ -292,13 +248,10 @@
                         </div>
                     </div>
 
-                    <!-- Artículos Relacionados -->
                     @if(isset($articulos_relacionados) && count($articulos_relacionados) > 0)
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
-                            <h6 class="fw-bold mb-3">
-                                <i class="fas fa-bookmark me-2"></i>Artículos Relacionados
-                            </h6>
+                            <h6 class="fw-bold mb-3"><i class="fas fa-bookmark me-2"></i>Artículos Relacionados</h6>
                             @foreach($articulos_relacionados as $relacionado)
                             <a href="{{ route('blog.articulo', $relacionado->_id) }}" 
                                class="d-flex text-decoration-none mb-3 hover-scale">
@@ -321,15 +274,10 @@
                     </div>
                     @endif
 
-                    <!-- Newsletter -->
                     <div class="card border-0 shadow-sm bg-primary text-white">
                         <div class="card-body">
-                            <h6 class="fw-bold mb-3">
-                                <i class="fas fa-envelope me-2"></i>Suscríbete
-                            </h6>
-                            <p class="small mb-3">
-                                Recibe las últimas noticias y consejos sobre maquinaria pesada
-                            </p>
+                            <h6 class="fw-bold mb-3"><i class="fas fa-envelope me-2"></i>Suscríbete</h6>
+                            <p class="small mb-3">Recibe las últimas noticias y consejos sobre maquinaria pesada</p>
                             <form action="{{ route('newsletter.subscribe') }}" method="POST">
                                 @csrf
                                 <div class="mb-3">
@@ -339,9 +287,7 @@
                                            placeholder="Tu email" 
                                            required>
                                 </div>
-                                <button type="submit" class="btn btn-light btn-sm w-100">
-                                    Suscribirse
-                                </button>
+                                <button type="submit" class="btn btn-light btn-sm w-100">Suscribirse</button>
                             </form>
                         </div>
                     </div>
@@ -353,79 +299,11 @@
 @endsection
 
 @push('styles')
-<style>
-.blog-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #333;
-}
-
-.blog-content h2 {
-    font-size: 1.75rem;
-    font-weight: bold;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    color: #1565C0;
-}
-
-.blog-content h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: #1565C0;
-}
-
-.blog-content p {
-    margin-bottom: 1.25rem;
-}
-
-.blog-content ul, .blog-content ol {
-    margin-bottom: 1.25rem;
-    padding-left: 2rem;
-}
-
-.blog-content li {
-    margin-bottom: 0.5rem;
-}
-
-.blog-content blockquote {
-    border-left: 4px solid #1565C0;
-    padding-left: 1.5rem;
-    margin: 1.5rem 0;
-    font-style: italic;
-    color: #666;
-}
-
-.blog-content img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 1.5rem 0;
-}
-
-.blog-content a {
-    color: #1565C0;
-    text-decoration: underline;
-}
-
-.blog-content a:hover {
-    color: #0D47A1;
-}
-
-.hover-scale {
-    transition: transform 0.3s ease;
-}
-
-.hover-scale:hover {
-    transform: translateY(-3px);
-}
-</style>
+<style>.blog-content{font-size:1.1rem;line-height:1.8;color:#333}.blog-content h2{font-size:1.75rem;font-weight:bold;margin-top:2rem;margin-bottom:1rem;color:#1565C0}.blog-content h3{font-size:1.5rem;font-weight:bold;margin-top:1.5rem;margin-bottom:0.75rem;color:#1565C0}.blog-content p{margin-bottom:1.25rem}.blog-content ul,.blog-content ol{margin-bottom:1.25rem;padding-left:2rem}.blog-content li{margin-bottom:0.5rem}.blog-content blockquote{border-left:4px solid #1565C0;padding-left:1.5rem;margin:1.5rem 0;font-style:italic;color:#666}.blog-content img{max-width:100%;height:auto;border-radius:8px;margin:1.5rem 0}.blog-content a{color:#1565C0;text-decoration:underline}.blog-content a:hover{color:#0D47A1}.hover-scale{transition:transform 0.3s ease}.hover-scale:hover{transform:translateY(-3px)}</style>
 @endpush
 
 @push('scripts')
 <script>
-// Copiar URL del artículo
 function copiarUrl() {
     const url = window.location.href;
     navigator.clipboard.writeText(url).then(() => {
@@ -439,7 +317,6 @@ function copiarUrl() {
     });
 }
 
-// Smooth scroll para enlaces internos
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();

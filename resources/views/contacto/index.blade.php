@@ -4,30 +4,25 @@
 @section('description', 'Contáctanos para más información sobre alquiler de maquinaria pesada y servicios de construcción en Cusco, Perú.')
 
 @section('content')
-<!-- Hero Section -->
-<section class="hero-section py-5">
+<section class="py-5 bg-gradient-primary text-white">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
-                <h1 class="display-4 fw-bold mb-3 text-white">Contáctanos</h1>
-                <p class="lead text-white mb-0">
-                    Estamos listos para atender tus consultas y ayudarte con tu proyecto
-                </p>
+                <h1 class="display-5 fw-bold mb-3">Contáctanos</h1>
+                <p class="lead mb-0">Estamos listos para atender tus consultas y ayudarte con tu proyecto</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <div class="bg-white p-3 rounded shadow d-inline-block">
-                    <i class="fas fa-envelope text-primary" style="font-size: 3rem;"></i>
+                <div class="bg-white p-4 rounded-3 shadow d-inline-block">
+                    <i class="fas fa-envelope text-primary fa-3x"></i>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Formulario de Contacto -->
-<section class="section-padding">
+<section class="py-5">
     <div class="container">
         <div class="row g-5">
-            <!-- Formulario -->
             <div class="col-lg-7">
                 <div class="card border-0 shadow">
                     <div class="card-body p-4 p-md-5">
@@ -87,32 +82,22 @@
                                            value="{{ old('empresa') }}">
                                 </div>
                                 
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <label class="form-label">Asunto <span class="text-danger">*</span></label>
                                     <select name="asunto" class="form-select @error('asunto') is-invalid @enderror" required>
                                         <option value="">Seleccionar...</option>
-                                        <option value="cotizacion" {{ old('asunto') == 'cotizacion' ? 'selected' : '' }}>
-                                            Solicitar Cotización
-                                        </option>
-                                        <option value="alquiler" {{ old('asunto') == 'alquiler' ? 'selected' : '' }}>
-                                            Alquiler de Maquinaria
-                                        </option>
-                                        <option value="servicio" {{ old('asunto') == 'servicio' ? 'selected' : '' }}>
-                                            Información de Servicios
-                                        </option>
-                                        <option value="proyecto" {{ old('asunto') == 'proyecto' ? 'selected' : '' }}>
-                                            Consulta sobre Proyecto
-                                        </option>
-                                        <option value="otro" {{ old('asunto') == 'otro' ? 'selected' : '' }}>
-                                            Otro
-                                        </option>
+                                        <option value="cotizacion" {{ old('asunto') == 'cotizacion' ? 'selected' : '' }}>Solicitar Cotización</option>
+                                        <option value="alquiler" {{ old('asunto') == 'alquiler' ? 'selected' : '' }}>Alquiler de Maquinaria</option>
+                                        <option value="servicio" {{ old('asunto') == 'servicio' ? 'selected' : '' }}>Información de Servicios</option>
+                                        <option value="proyecto" {{ old('asunto') == 'proyecto' ? 'selected' : '' }}>Consulta sobre Proyecto</option>
+                                        <option value="otro" {{ old('asunto') == 'otro' ? 'selected' : '' }}>Otro</option>
                                     </select>
                                     @error('asunto')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 
-                                <div class="col-md-12">
+                                <div class="col-12">
                                     <label class="form-label">Mensaje <span class="text-danger">*</span></label>
                                     <textarea name="mensaje" 
                                               class="form-control @error('mensaje') is-invalid @enderror" 
@@ -123,8 +108,8 @@
                                     @enderror
                                 </div>
                                 
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-lg">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg px-4 py-3 fw-semibold">
                                         <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
                                     </button>
                                 </div>
@@ -134,17 +119,16 @@
                 </div>
             </div>
             
-            <!-- Información de Contacto -->
             <div class="col-lg-5">
-                <!-- Información Principal -->
                 <div class="card border-0 shadow mb-4">
                     <div class="card-body p-4">
                         <h5 class="fw-bold mb-4">Información de Contacto</h5>
                         
                         <div class="mb-4">
                             <div class="d-flex align-items-start">
-                                <div class="icon-box me-3">
-                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                <div class="bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                     style="width: 40px; height: 40px;">
+                                    <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Dirección</h6>
@@ -158,13 +142,14 @@
                         
                         <div class="mb-4">
                             <div class="d-flex align-items-start">
-                                <div class="icon-box me-3">
-                                    <i class="fas fa-phone text-primary"></i>
+                                <div class="bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                     style="width: 40px; height: 40px;">
+                                    <i class="fas fa-phone"></i>
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Teléfono</h6>
                                     <p class="text-muted mb-0">
-                                        <a href="tel:+51984123456">+51 984 123 456</a>
+                                        <a href="tel:+51984123456" class="text-decoration-none">+51 984 123 456</a>
                                     </p>
                                 </div>
                             </div>
@@ -172,13 +157,14 @@
                         
                         <div class="mb-4">
                             <div class="d-flex align-items-start">
-                                <div class="icon-box me-3">
-                                    <i class="fas fa-envelope text-primary"></i>
+                                <div class="bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                     style="width: 40px; height: 40px;">
+                                    <i class="fas fa-envelope"></i>
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Email</h6>
                                     <p class="text-muted mb-0">
-                                        <a href="mailto:vallenasfernando43@gmail.com">
+                                        <a href="mailto:vallenasfernando43@gmail.com" class="text-decoration-none">
                                             vallenasfernando43@gmail.com
                                         </a>
                                     </p>
@@ -188,8 +174,9 @@
                         
                         <div>
                             <div class="d-flex align-items-start">
-                                <div class="icon-box me-3">
-                                    <i class="fas fa-clock text-primary"></i>
+                                <div class="bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center" 
+                                     style="width: 40px; height: 40px;">
+                                    <i class="fas fa-clock"></i>
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Horario de Atención</h6>
@@ -204,21 +191,24 @@
                     </div>
                 </div>
                 
-                <!-- Redes Sociales -->
                 <div class="card border-0 shadow">
                     <div class="card-body p-4">
                         <h5 class="fw-bold mb-3">Síguenos en Redes Sociales</h5>
-                        <div class="d-flex gap-2">
-                            <a href="#" class="btn btn-primary btn-lg" target="_blank">
+                        <div class="d-flex flex-wrap gap-2">
+                            <a href="https://facebook.com/etcvallenas" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" 
+                               style="width: 50px; height: 50px;" target="_blank">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="btn btn-danger btn-lg" target="_blank">
+                            <a href="https://instagram.com/etcvallenas" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" 
+                               style="width: 50px; height: 50px;" target="_blank">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="btn btn-info btn-lg" target="_blank">
+                            <a href="https://linkedin.com/company/etcvallenas" class="btn btn-info rounded-circle d-flex align-items-center justify-content-center" 
+                               style="width: 50px; height: 50px;" target="_blank">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://wa.me/51984123456" class="btn btn-success btn-lg" target="_blank">
+                            <a href="https://wa.me/51984123456" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center" 
+                               style="width: 50px; height: 50px;" target="_blank">
                                 <i class="fab fa-whatsapp"></i>
                             </a>
                         </div>
@@ -229,8 +219,7 @@
     </div>
 </section>
 
-<!-- Mapa -->
-<section class="py-0">
+<section>
     <div class="container-fluid p-0">
         <div id="map" style="height: 400px;"></div>
     </div>
@@ -241,7 +230,6 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script>
-    // Coordenadas de Cusco (puedes ajustar a tu ubicación exacta)
     const lat = -13.53195;
     const lng = -71.96746;
     

@@ -9,11 +9,6 @@ class Maquinaria extends Model
     protected $connection = 'mongodb';
     protected $collection = 'maquinaria';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'nombre',
         'codigo',
@@ -49,11 +44,6 @@ class Maquinaria extends Model
         'observaciones',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -75,29 +65,6 @@ class Maquinaria extends Model
         ];
     }
 
-    /**
-     * Check if machinery is available
-     */
-    public function isAvailable(): bool
-    {
-        return $this->disponibilidad === 'disponible' && $this->estado === 'operativo';
-    }
-
-    /**
-     * Check if machinery needs maintenance
-     */
-    public function needsMaintenance(): bool
-    {
-        if (!$this->proxima_mantenimiento) {
-            return false;
-        }
-
-        return $this->proxima_mantenimiento->isPast();
-    }
-
-    /**
-     * Get main image URL
-     */
     public function getMainImageAttribute(): string
     {
         if (!empty($this->imagenes) && isset($this->imagenes[0])) {
@@ -107,9 +74,6 @@ class Maquinaria extends Model
         return asset('assets/images/maquinaria-placeholder.jpg');
     }
 
-    /**
-     * Get status badge class
-     */
     public function getStatusBadgeClassAttribute(): string
     {
         return match($this->estado) {
@@ -121,9 +85,6 @@ class Maquinaria extends Model
         };
     }
 
-    /**
-     * Get availability badge class
-     */
     public function getAvailabilityBadgeClassAttribute(): string
     {
         return match($this->disponibilidad) {
@@ -135,26 +96,31 @@ class Maquinaria extends Model
         };
     }
 
-    /**
-     * Proyectos where this machinery is used
-     */
     public function proyectos()
     {
         return $this->belongsToMany(Proyecto::class, null, 'maquinaria_ids', 'proyecto_ids');
     }
 
-    /**
-     * Scope to get available machinery
-     */
+    public function isAvailable(): bool
+    {
+        return $this->disponibilidad === 'disponible' && $this->estado === 'operativo';
+    }
+
+    public function needsMaintenance(): bool
+    {
+        if (!$this->proxima_mantenimiento) {
+            return false;
+        }
+
+        return $this->proxima_mantenimiento->isPast();
+    }
+
     public function scopeAvailable($query)
     {
         return $query->where('disponibilidad', 'disponible')
                      ->where('estado', 'operativo');
     }
 
-    /**
-     * Scope to filter by type
-     */
     public function scopeByType($query, $type)
     {
         return $query->where('tipo', $type);

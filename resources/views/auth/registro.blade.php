@@ -9,14 +9,12 @@
             <div class="col-lg-6 col-md-8">
                 <div class="card shadow-lg border-0">
                     <div class="card-body p-5">
-                        <!-- Logo -->
                         <div class="text-center mb-4">
                             <img src="{{ asset('assets/images/logo.png') }}" alt="ETC Vallenas" height="60">
                             <h3 class="mt-3 fw-bold">Crear Cuenta</h3>
                             <p class="text-muted">Únete a ETC Vallenas hoy mismo</p>
                         </div>
 
-                        <!-- Errores -->
                         @if($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <i class="fas fa-exclamation-circle me-2"></i>
@@ -29,12 +27,10 @@
                         </div>
                         @endif
 
-                        <!-- Formulario de Registro -->
-                        <form action="{{ route('registro') }}" method="POST">
+                        <form action="{{ route('registro.store') }}" method="POST">
                             @csrf
                             
                             <div class="row">
-                                <!-- Nombre -->
                                 <div class="col-md-6 mb-3">
                                     <label for="nombre" class="form-label">
                                         <i class="fas fa-user me-1"></i>Nombre *
@@ -51,7 +47,6 @@
                                     @enderror
                                 </div>
 
-                                <!-- Apellido -->
                                 <div class="col-md-6 mb-3">
                                     <label for="apellido" class="form-label">
                                         <i class="fas fa-user me-1"></i>Apellido *
@@ -69,7 +64,6 @@
                                 </div>
                             </div>
 
-                            <!-- Email -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">
                                     <i class="fas fa-envelope me-1"></i>Correo Electrónico *
@@ -86,7 +80,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Teléfono -->
                             <div class="mb-3">
                                 <label for="telefono" class="form-label">
                                     <i class="fas fa-phone me-1"></i>Teléfono *
@@ -103,7 +96,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Empresa (Opcional) -->
                             <div class="mb-3">
                                 <label for="empresa" class="form-label">
                                     <i class="fas fa-building me-1"></i>Empresa (Opcional)
@@ -120,7 +112,6 @@
                             </div>
 
                             <div class="row">
-                                <!-- Contraseña -->
                                 <div class="col-md-6 mb-3">
                                     <label for="password" class="form-label">
                                         <i class="fas fa-lock me-1"></i>Contraseña *
@@ -136,7 +127,6 @@
                                     @enderror
                                 </div>
 
-                                <!-- Confirmar Contraseña -->
                                 <div class="col-md-6 mb-3">
                                     <label for="password_confirmation" class="form-label">
                                         <i class="fas fa-lock me-1"></i>Confirmar Contraseña *
@@ -150,16 +140,22 @@
                                 </div>
                             </div>
 
-                            <!-- Términos y Condiciones -->
                             <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="terminos" required>
+                                <input class="form-check-input @error('terminos') is-invalid @enderror" 
+                                       type="checkbox" 
+                                       id="terminos" 
+                                       name="terminos"
+                                       {{ old('terminos') ? 'checked' : '' }}
+                                       required>
                                 <label class="form-check-label" for="terminos">
-                                    Acepto los <a href="#" class="text-decoration-none">términos y condiciones</a> 
-                                    y la <a href="#" class="text-decoration-none">política de privacidad</a>
+                                    Acepto los <a href="{{ route('terminos') }}" class="text-decoration-none">términos y condiciones</a> 
+                                    y la <a href="{{ route('privacidad') }}" class="text-decoration-none">política de privacidad</a>
                                 </label>
+                                @error('terminos')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
                             </div>
 
-                            <!-- Botón de Registro -->
                             <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
                                 <i class="fas fa-user-plus me-2"></i>Crear Cuenta
                             </button>
@@ -167,7 +163,6 @@
 
                         <hr class="my-4">
 
-                        <!-- Login -->
                         <div class="text-center">
                             <p class="text-muted mb-0">
                                 ¿Ya tienes cuenta? 
@@ -179,7 +174,6 @@
                     </div>
                 </div>
 
-                <!-- Volver al inicio -->
                 <div class="text-center mt-3">
                     <a href="{{ route('home') }}" class="text-white text-decoration-none">
                         <i class="fas fa-arrow-left me-2"></i>Volver al inicio
@@ -190,3 +184,28 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('password_confirmation');
+    
+    function validatePassword() {
+        if (password.value !== confirmPassword.value) {
+            confirmPassword.setCustomValidity('Las contraseñas no coinciden');
+        } else {
+            confirmPassword.setCustomValidity('');
+        }
+    }
+    
+    password.addEventListener('input', validatePassword);
+    confirmPassword.addEventListener('input', validatePassword);
+    
+    const telefono = document.getElementById('telefono');
+    telefono.addEventListener('input', function(e) {
+        e.target.value = e.target.value.replace(/[^0-9+\s-]/g, '');
+    });
+});
+</script>
+@endpush

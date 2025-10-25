@@ -3,7 +3,6 @@
 @section('title', 'Configuración - ETC Vallenas')
 
 @section('content')
-<!-- Header Section -->
 <section class="py-4 bg-light">
     <div class="container">
         <h1 class="h3 fw-bold mb-0">Configuración</h1>
@@ -11,7 +10,6 @@
     </div>
 </section>
 
-<!-- Configuración Content -->
 <section class="section-padding">
     <div class="container">
         @if(session('success'))
@@ -22,29 +20,20 @@
         @endif
         
         <div class="row g-4">
-            <!-- Menú Lateral -->
             <div class="col-lg-3">
                 <div class="card border-0 shadow">
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
-                            <a href="#notificaciones" 
-                               class="list-group-item list-group-item-action active" 
-                               data-bs-toggle="list">
+                            <a href="#notificaciones" class="list-group-item list-group-item-action active" data-bs-toggle="list">
                                 <i class="fas fa-bell me-2"></i>Notificaciones
                             </a>
-                            <a href="#privacidad" 
-                               class="list-group-item list-group-item-action" 
-                               data-bs-toggle="list">
+                            <a href="#privacidad" class="list-group-item list-group-item-action" data-bs-toggle="list">
                                 <i class="fas fa-lock me-2"></i>Privacidad
                             </a>
-                            <a href="#seguridad" 
-                               class="list-group-item list-group-item-action" 
-                               data-bs-toggle="list">
+                            <a href="#seguridad" class="list-group-item list-group-item-action" data-bs-toggle="list">
                                 <i class="fas fa-shield-alt me-2"></i>Seguridad
                             </a>
-                            <a href="#preferencias" 
-                               class="list-group-item list-group-item-action" 
-                               data-bs-toggle="list">
+                            <a href="#preferencias" class="list-group-item list-group-item-action" data-bs-toggle="list">
                                 <i class="fas fa-cog me-2"></i>Preferencias
                             </a>
                         </div>
@@ -52,172 +41,96 @@
                 </div>
             </div>
             
-            <!-- Contenido de Configuración -->
             <div class="col-lg-9">
-                <div class="tab-content">
-                    <!-- Notificaciones -->
-                    <div class="tab-pane fade show active" id="notificaciones">
-                        <div class="card border-0 shadow">
-                            <div class="card-body p-4">
-                                <h5 class="fw-bold mb-4">
-                                    <i class="fas fa-bell me-2"></i>Configuración de Notificaciones
-                                </h5>
-                                
-                                <form action="{{ route('usuario.configuracion.update') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="tipo" value="notificaciones">
+                <form action="{{ route('usuario.actualizar-configuracion') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="notificaciones">
+                            <div class="card border-0 shadow">
+                                <div class="card-body p-4">
+                                    <h5 class="fw-bold mb-4"><i class="fas fa-bell me-2"></i>Notificaciones</h5>
                                     
                                     <div class="mb-4">
-                                        <h6 class="fw-bold mb-3">Notificaciones por Email</h6>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="checkbox" 
-                                                   name="email_nuevos_servicios" 
-                                                   id="emailNuevosServicios" 
-                                                   checked>
-                                            <label class="form-check-label" for="emailNuevosServicios">
-                                                Nuevos servicios y promociones
-                                            </label>
+                                        <h6 class="fw-bold mb-3">Email</h6>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" name="notificaciones[email_nuevos_servicios]" value="1" checked>
+                                            <label class="form-check-label">Nuevos servicios y promociones</label>
                                         </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="checkbox" 
-                                                   name="email_actualizaciones" 
-                                                   id="emailActualizaciones" 
-                                                   checked>
-                                            <label class="form-check-label" for="emailActualizaciones">
-                                                Actualizaciones de proyectos
-                                            </label>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" name="notificaciones[email_actualizaciones]" value="1" checked>
+                                            <label class="form-check-label">Actualizaciones de proyectos</label>
                                         </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="checkbox" 
-                                                   name="email_newsletter" 
-                                                   id="emailNewsletter">
-                                            <label class="form-check-label" for="emailNewsletter">
-                                                Newsletter mensual
-                                            </label>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" name="notificaciones[email_newsletter]" value="1">
+                                            <label class="form-check-label">Newsletter mensual</label>
                                         </div>
                                     </div>
                                     
                                     <div class="mb-4">
-                                        <h6 class="fw-bold mb-3">Notificaciones en el Sistema</h6>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="checkbox" 
-                                                   name="sistema_mensajes" 
-                                                   id="sistemaMensajes" 
-                                                   checked>
-                                            <label class="form-check-label" for="sistemaMensajes">
-                                                Mensajes y comunicaciones
-                                            </label>
+                                        <h6 class="fw-bold mb-3">Sistema</h6>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" name="notificaciones[sistema_mensajes]" value="1" checked>
+                                            <label class="form-check-label">Mensajes y comunicaciones</label>
                                         </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="checkbox" 
-                                                   name="sistema_alertas" 
-                                                   id="sistemaAlertas" 
-                                                   checked>
-                                            <label class="form-check-label" for="sistemaAlertas">
-                                                Alertas importantes
-                                            </label>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" name="notificaciones[sistema_alertas]" value="1" checked>
+                                            <label class="form-check-label">Alertas importantes</label>
                                         </div>
                                     </div>
-                                    
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-2"></i>Guardar Cambios
-                                    </button>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Privacidad -->
-                    <div class="tab-pane fade" id="privacidad">
-                        <div class="card border-0 shadow">
-                            <div class="card-body p-4">
-                                <h5 class="fw-bold mb-4">
-                                    <i class="fas fa-lock me-2"></i>Configuración de Privacidad
-                                </h5>
-                                
-                                <form action="{{ route('usuario.configuracion.update') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="tipo" value="privacidad">
+                        
+                        <div class="tab-pane fade" id="privacidad">
+                            <div class="card border-0 shadow">
+                                <div class="card-body p-4">
+                                    <h5 class="fw-bold mb-4"><i class="fas fa-lock me-2"></i>Privacidad</h5>
                                     
                                     <div class="mb-4">
                                         <h6 class="fw-bold mb-3">Visibilidad del Perfil</h6>
                                         <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="radio" 
-                                                   name="visibilidad_perfil" 
-                                                   id="perfilPublico" 
-                                                   value="publico">
+                                            <input class="form-check-input" type="radio" name="privacidad[visibilidad_perfil]" value="publico" id="perfilPublico">
                                             <label class="form-check-label" for="perfilPublico">
                                                 <strong>Público</strong>
-                                                <br><small class="text-muted">Tu perfil es visible para todos</small>
+                                                <small class="text-muted d-block">Tu perfil es visible para todos</small>
                                             </label>
                                         </div>
                                         <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="radio" 
-                                                   name="visibilidad_perfil" 
-                                                   id="perfilPrivado" 
-                                                   value="privado" 
-                                                   checked>
+                                            <input class="form-check-input" type="radio" name="privacidad[visibilidad_perfil]" value="privado" id="perfilPrivado" checked>
                                             <label class="form-check-label" for="perfilPrivado">
                                                 <strong>Privado</strong>
-                                                <br><small class="text-muted">Solo visible para administradores</small>
+                                                <small class="text-muted d-block">Solo visible para administradores</small>
                                             </label>
                                         </div>
                                     </div>
                                     
                                     <div class="mb-4">
                                         <h6 class="fw-bold mb-3">Compartir Información</h6>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="checkbox" 
-                                                   name="compartir_empresa" 
-                                                   id="compartirEmpresa">
-                                            <label class="form-check-label" for="compartirEmpresa">
-                                                Mostrar información de mi empresa
-                                            </label>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" name="privacidad[compartir_empresa]" value="1">
+                                            <label class="form-check-label">Mostrar información de mi empresa</label>
                                         </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" 
-                                                   type="checkbox" 
-                                                   name="compartir_telefono" 
-                                                   id="compartirTelefono">
-                                            <label class="form-check-label" for="compartirTelefono">
-                                                Mostrar mi número de teléfono
-                                            </label>
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" name="privacidad[compartir_telefono]" value="1">
+                                            <label class="form-check-label">Mostrar mi número de teléfono</label>
                                         </div>
                                     </div>
-                                    
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-2"></i>Guardar Cambios
-                                    </button>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Seguridad -->
-                    <div class="tab-pane fade" id="seguridad">
-                        <div class="card border-0 shadow">
-                            <div class="card-body p-4">
-                                <h5 class="fw-bold mb-4">
-                                    <i class="fas fa-shield-alt me-2"></i>Configuración de Seguridad
-                                </h5>
-                                
-                                <form action="{{ route('usuario.configuracion.update') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="tipo" value="seguridad">
+                        
+                        <div class="tab-pane fade" id="seguridad">
+                            <div class="card border-0 shadow">
+                                <div class="card-body p-4">
+                                    <h5 class="fw-bold mb-4"><i class="fas fa-shield-alt me-2"></i>Seguridad</h5>
                                     
                                     <div class="mb-4">
                                         <h6 class="fw-bold mb-3">Contraseña</h6>
-                                        <p class="text-muted">
+                                        <p class="text-muted mb-3">
                                             Última actualización: 
-                                            {{ Auth::user()->updated_at ? \Carbon\Carbon::parse(Auth::user()->updated_at)->format('d/m/Y') : 'N/A' }}
+                                            {{ Auth::user()->updated_at->format('d/m/Y') }}
                                         </p>
                                         <a href="{{ route('usuario.perfil') }}" class="btn btn-outline-primary">
                                             <i class="fas fa-key me-2"></i>Cambiar Contraseña
@@ -226,93 +139,75 @@
                                     
                                     <div class="mb-4">
                                         <h6 class="fw-bold mb-3">Autenticación en Dos Pasos</h6>
-                                        <p class="text-muted">
-                                            Añade una capa extra de seguridad a tu cuenta
-                                        </p>
-                                        <div class="form-check">
-                                            <input class="form-check-input" 
-                                                   type="checkbox" 
-                                                   name="autenticacion_dos_pasos" 
-                                                   id="autenticacionDosPasos">
-                                            <label class="form-check-label" for="autenticacionDosPasos">
-                                                Activar autenticación en dos pasos
-                                            </label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="seguridad[autenticacion_dos_pasos]" value="1">
+                                            <label class="form-check-label">Activar autenticación en dos pasos</label>
                                         </div>
                                     </div>
                                     
                                     <div class="mb-4">
                                         <h6 class="fw-bold mb-3">Sesiones Activas</h6>
-                                        <p class="text-muted">
-                                            Estás conectado desde los siguientes dispositivos:
-                                        </p>
                                         <div class="list-group">
                                             <div class="list-group-item">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div>
                                                         <i class="fas fa-desktop text-primary me-2"></i>
                                                         <strong>Windows PC</strong>
-                                                        <br><small class="text-muted">Última actividad: Hoy a las 10:30 AM</small>
+                                                        <small class="text-muted d-block">Última actividad: Hoy a las 10:30 AM</small>
                                                     </div>
                                                     <span class="badge bg-success">Actual</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="preferencias">
+                            <div class="card border-0 shadow">
+                                <div class="card-body p-4">
+                                    <h5 class="fw-bold mb-4"><i class="fas fa-cog me-2"></i>Preferencias</h5>
                                     
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-2"></i>Guardar Cambios
-                                    </button>
-                                </form>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Idioma</label>
+                                            <select class="form-select" name="preferencias[idioma]">
+                                                <option value="es" selected>Español</option>
+                                                <option value="en">English</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Zona Horaria</label>
+                                            <select class="form-select" name="preferencias[zona_horaria]">
+                                                <option value="America/Lima" selected>Lima (GMT-5)</option>
+                                                <option value="America/New_York">Nueva York (GMT-4)</option>
+                                                <option value="Europe/Madrid">Madrid (GMT+1)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label fw-bold">Formato de Fecha</label>
+                                            <select class="form-select" name="preferencias[formato_fecha]">
+                                                <option value="dd/mm/yyyy" selected>DD/MM/YYYY</option>
+                                                <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                                <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Preferencias -->
-                    <div class="tab-pane fade" id="preferencias">
-                        <div class="card border-0 shadow">
-                            <div class="card-body p-4">
-                                <h5 class="fw-bold mb-4">
-                                    <i class="fas fa-cog me-2"></i>Preferencias Generales
-                                </h5>
-                                
-                                <form action="{{ route('usuario.configuracion.update') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="tipo" value="preferencias">
-                                    
-                                    <div class="mb-4">
-                                        <label class="form-label fw-bold">Idioma</label>
-                                        <select class="form-select" name="idioma">
-                                            <option value="es" selected>Español</option>
-                                            <option value="en">English</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="mb-4">
-                                        <label class="form-label fw-bold">Zona Horaria</label>
-                                        <select class="form-select" name="zona_horaria">
-                                            <option value="America/Lima" selected>Lima (GMT-5)</option>
-                                            <option value="America/New_York">Nueva York (GMT-4)</option>
-                                            <option value="Europe/Madrid">Madrid (GMT+1)</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="mb-4">
-                                        <label class="form-label fw-bold">Formato de Fecha</label>
-                                        <select class="form-select" name="formato_fecha">
-                                            <option value="dd/mm/yyyy" selected>DD/MM/YYYY</option>
-                                            <option value="mm/dd/yyyy">MM/DD/YYYY</option>
-                                            <option value="yyyy-mm-dd">YYYY-MM-DD</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save me-2"></i>Guardar Cambios
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="fas fa-save me-2"></i>Guardar Cambios
+                        </button>
+                        <a href="{{ route('usuario.dashboard') }}" class="btn btn-outline-secondary ms-2">
+                            <i class="fas fa-arrow-left me-2"></i>Volver al Dashboard
+                        </a>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

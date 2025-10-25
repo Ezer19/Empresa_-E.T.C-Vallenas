@@ -1,7 +1,7 @@
 #  ETC Vallenas - Sistema de Gestión de Maquinaria Pesada
 
 <div align="center">
-  <img src="public/assets/images/logo.png" alt="ETC Vallenas Logo" width="200"/>
+  <img src="https://thumbs.dreamstime.com/b/dise%C3%B1o-del-logotipo-de-construcci%C3%B3n-excavaci%C3%B3n-elemento-equipo-pesado-miner%C3%ADa-veh%C3%ADculos-transporte-389775260.jpg" alt="ETC Vallenas Logo" width="200"/>
   
   [![Laravel](https://img.shields.io/badge/Laravel-10.x-red.svg)](https://laravel.com)
   [![MongoDB](https://img.shields.io/badge/MongoDB-7.0-green.svg)](https://www.mongodb.com/)
@@ -299,39 +299,39 @@ Este software es propiedad exclusiva de ETC Vallenas y está protegido por leyes
   </p>
   <p>
     Email: ezerzuniga.dev@gmail.com<br>
-    📱 Instagram: @ezerzuniga.oficial16
+    Instagram: @ezerzuniga.oficial16
   </p>
 </div>
 
-## 📞 Contacto ETC Vallenas
+## Contacto ETC Vallenas
 
 - **Web**: https://www.etcvallenas.com
 - **Email**: vallenasfernando43@gmail.com
 - **Teléfono**: +51 984 123 456
-- **Dirección**: Av. Los Incas 123, Cusco, Perú
-- **Horario**: Lun-Vie 8:00-18:00
+- **Dirección**: Av. La cultura control, Cusco, Perú
+- **Horario**: Lun-Sab 8:00-18:00
 
 ## Roadmap
 
 ### Versión 1.0 (Actual)
-- [x] Sistema de autenticación
-- [x] Catálogo de maquinaria
-- [x] Gestión de proyectos
-- [x] Sistema de cotizaciones
-- [x] Panel administrativo
+- Sistema de autenticación
+- Catálogo de maquinaria
+- Gestión de proyectos
+- Sistema de cotizaciones
+- Panel administrativo
 
 ### Versión 1.1 (Próximamente)
-- [ ] App móvil (React Native)
-- [ ] Sistema de pagos online
-- [ ] Chat en vivo
-- [ ] Integración con GPS
-- [ ] Firma digital de contratos
+- App móvil (React Native)
+- Sistema de pagos online
+- Chat en vivo
+- Integración con GPS
+- Firma digital de contratos
 
 ### Versión 2.0 (Futuro)
-- [ ] IoT para maquinaria
-- [ ] IA para mantenimiento predictivo
-- [ ] Realidad aumentada para demostraciones
-- [ ] Blockchain para trazabilidad
+- IoT para maquinaria
+- IA para mantenimiento predictivo
+- Realidad aumentada para demostraciones
+- Blockchain para trazabilidad
 
 ---
 

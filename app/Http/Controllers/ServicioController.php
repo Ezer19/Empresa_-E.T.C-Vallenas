@@ -7,39 +7,28 @@ use Illuminate\Http\Request;
 
 class ServicioController extends Controller
 {
-    /**
-     * Mostrar listado de servicios
-     */
     public function index(Request $request)
     {
         $query = Servicio::where('estado', 'activo');
 
-        // Filtrar por tipo
         if ($request->has('tipo') && $request->tipo) {
             $query->where('tipo', $request->tipo);
         }
 
-        // Filtrar por categoría
         if ($request->has('categoria') && $request->categoria) {
             $query->where('categoria', $request->categoria);
         }
 
         $servicios = $query->ordered()->paginate(12);
-        
-        // Obtener tipos para filtros
         $tipos = Servicio::distinct('tipo')->pluck('tipo');
 
         return view('servicios.index', compact('servicios', 'tipos'));
     }
 
-    /**
-     * Mostrar detalle de servicio
-     */
     public function show($id)
     {
         $servicio = Servicio::where('estado', 'activo')->findOrFail($id);
         
-        // Servicios relacionados
         $relacionados = Servicio::where('tipo', $servicio->tipo)
             ->where('_id', '!=', $id)
             ->where('estado', 'activo')
@@ -49,9 +38,6 @@ class ServicioController extends Controller
         return view('servicios.detalle', compact('servicio', 'relacionados'));
     }
 
-    /**
-     * Crear nuevo servicio (Admin)
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -66,7 +52,6 @@ class ServicioController extends Controller
             'descripcion_corta.max' => 'La descripción corta no debe superar 500 caracteres',
         ]);
 
-        // Generar código único
         $codigo = 'SER-' . strtoupper(substr($request->tipo, 0, 3)) . '-' . str_pad(Servicio::count() + 1, 4, '0', STR_PAD_LEFT);
 
         $data = $request->all();
@@ -82,9 +67,6 @@ class ServicioController extends Controller
             ->with('success', 'Servicio creado exitosamente.');
     }
 
-    /**
-     * Actualizar servicio (Admin)
-     */
     public function update(Request $request, $id)
     {
         $servicio = Servicio::findOrFail($id);
@@ -100,9 +82,6 @@ class ServicioController extends Controller
             ->with('success', 'Servicio actualizado exitosamente.');
     }
 
-    /**
-     * Eliminar servicio (Admin)
-     */
     public function destroy($id)
     {
         $servicio = Servicio::findOrFail($id);
@@ -112,9 +91,6 @@ class ServicioController extends Controller
             ->with('success', 'Servicio eliminado exitosamente.');
     }
 
-    /**
-     * Incrementar popularidad
-     */
     public function incrementarPopularidad($id)
     {
         $servicio = Servicio::findOrFail($id);

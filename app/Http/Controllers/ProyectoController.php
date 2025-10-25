@@ -9,44 +9,32 @@ use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
 {
-    /**
-     * Mostrar listado de proyectos
-     */
     public function index(Request $request)
     {
         $query = Proyecto::with('responsable');
 
-        // Filtrar por tipo
         if ($request->has('tipo') && $request->tipo) {
             $query->where('tipo', $request->tipo);
         }
 
-        // Filtrar por estado
         if ($request->has('estado') && $request->estado) {
             $query->where('estado', $request->estado);
         }
 
-        // Buscar por nombre
         if ($request->has('buscar') && $request->buscar) {
             $query->where('nombre', 'like', '%' . $request->buscar . '%');
         }
 
         $proyectos = $query->orderBy('created_at', 'desc')->paginate(12);
-        
-        // Obtener tipos para filtros
         $tipos = Proyecto::distinct('tipo')->pluck('tipo');
 
         return view('proyectos.index', compact('proyectos', 'tipos'));
     }
 
-    /**
-     * Mostrar detalle de proyecto
-     */
     public function show($id)
     {
         $proyecto = Proyecto::with('responsable', 'maquinaria')->findOrFail($id);
         
-        // Proyectos relacionados
         $relacionados = Proyecto::where('tipo', $proyecto->tipo)
             ->where('_id', '!=', $id)
             ->limit(3)
@@ -55,9 +43,6 @@ class ProyectoController extends Controller
         return view('proyectos.detalle', compact('proyecto', 'relacionados'));
     }
 
-    /**
-     * Crear nuevo proyecto (Admin)
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -78,7 +63,6 @@ class ProyectoController extends Controller
             'fecha_estimada_fin.after' => 'La fecha de fin debe ser posterior a la fecha de inicio',
         ]);
 
-        // Generar código único
         $codigo = 'PROY-' . date('Y') . '-' . str_pad(Proyecto::count() + 1, 4, '0', STR_PAD_LEFT);
 
         $data = $request->all();
@@ -95,9 +79,6 @@ class ProyectoController extends Controller
             ->with('success', 'Proyecto creado exitosamente.');
     }
 
-    /**
-     * Actualizar proyecto (Admin)
-     */
     public function update(Request $request, $id)
     {
         $proyecto = Proyecto::findOrFail($id);
@@ -114,9 +95,6 @@ class ProyectoController extends Controller
             ->with('success', 'Proyecto actualizado exitosamente.');
     }
 
-    /**
-     * Eliminar proyecto (Admin)
-     */
     public function destroy($id)
     {
         $proyecto = Proyecto::findOrFail($id);
@@ -126,9 +104,6 @@ class ProyectoController extends Controller
             ->with('success', 'Proyecto eliminado exitosamente.');
     }
 
-    /**
-     * Actualizar avance del proyecto
-     */
     public function actualizarAvance(Request $request, $id)
     {
         $proyecto = Proyecto::findOrFail($id);
@@ -141,7 +116,6 @@ class ProyectoController extends Controller
             'avance_porcentaje' => $request->avance_porcentaje,
         ]);
 
-        // Si el avance es 100%, marcar como completado
         if ($request->avance_porcentaje == 100) {
             $proyecto->update([
                 'estado' => 'completado',

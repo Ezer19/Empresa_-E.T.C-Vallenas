@@ -9,14 +9,20 @@
             <div class="col-md-5">
                 <div class="card shadow-lg border-0">
                     <div class="card-body p-5">
-                        <!-- Logo -->
                         <div class="text-center mb-4">
                             <img src="{{ asset('assets/images/logo.png') }}" alt="ETC Vallenas" height="60">
                             <h3 class="mt-3 fw-bold">Iniciar Sesión</h3>
                             <p class="text-muted">Accede a tu cuenta de ETC Vallenas</p>
                         </div>
 
-                        <!-- Errores -->
+                        @if(session('status'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>
+                            {{ session('status') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        @endif
+
                         @if($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <i class="fas fa-exclamation-circle me-2"></i>
@@ -29,11 +35,9 @@
                         </div>
                         @endif
 
-                        <!-- Formulario de Login -->
-                        <form action="{{ route('login') }}" method="POST">
+                        <form action="{{ route('login') }}" method="POST" id="loginForm">
                             @csrf
                             
-                            <!-- Email -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">
                                     <i class="fas fa-envelope me-1"></i>Correo Electrónico
@@ -51,7 +55,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Contraseña -->
                             <div class="mb-3">
                                 <label for="password" class="form-label">
                                     <i class="fas fa-lock me-1"></i>Contraseña
@@ -67,30 +70,25 @@
                                 @enderror
                             </div>
 
-                            <!-- Recordarme -->
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember">
-                                    Recordarme en este dispositivo
-                                </label>
-                            </div>
-
-                            <!-- Botón de Login -->
-                            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">
-                                <i class="fas fa-sign-in-alt me-2"></i>Ingresar
-                            </button>
-
-                            <!-- Enlaces -->
-                            <div class="text-center">
-                                <a href="{{ route('recuperar') }}" class="text-decoration-none">
-                                    <i class="fas fa-question-circle me-1"></i>¿Olvidaste tu contraseña?
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="remember">
+                                        Recordarme
+                                    </label>
+                                </div>
+                                <a href="{{ route('password.request') }}" class="text-decoration-none small">
+                                    ¿Olvidaste tu contraseña?
                                 </a>
                             </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100 mb-3" id="loginBtn">
+                                <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+                            </button>
                         </form>
 
                         <hr class="my-4">
 
-                        <!-- Registro -->
                         <div class="text-center">
                             <p class="text-muted mb-0">
                                 ¿No tienes cuenta? 
@@ -102,7 +100,6 @@
                     </div>
                 </div>
 
-                <!-- Volver al inicio -->
                 <div class="text-center mt-3">
                     <a href="{{ route('home') }}" class="text-white text-decoration-none">
                         <i class="fas fa-arrow-left me-2"></i>Volver al inicio
@@ -113,3 +110,31 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    const loginBtn = document.getElementById('loginBtn');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+
+    loginForm.addEventListener('submit', function(e) {
+        loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Ingresando...';
+        loginBtn.disabled = true;
+    });
+
+    [emailInput, passwordInput].forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.classList.contains('is-invalid')) {
+                this.classList.remove('is-invalid');
+            }
+        });
+    });
+
+    if (!emailInput.value) {
+        emailInput.focus();
+    }
+});
+</script>
+@endpush

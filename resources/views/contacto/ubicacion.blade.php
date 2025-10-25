@@ -4,39 +4,33 @@
 @section('description', 'Encuéntranos en Cusco, Perú. Oficinas, almacenes y cómo llegar a ETC Vallenas.')
 
 @section('content')
-<!-- Header de Ubicación -->
-<section class="py-5" style="background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);">
+<section class="py-5 bg-gradient-primary text-white">
     <div class="container">
-        <div class="row justify-content-center text-center text-white">
+        <div class="row justify-content-center text-center">
             <div class="col-lg-8">
                 <div class="mb-4">
                     <i class="fas fa-map-marked-alt fa-4x mb-3"></i>
                 </div>
-                <h1 class="display-4 fw-bold mb-3">Nuestra Ubicación</h1>
-                <p class="lead mb-0">
-                    Visítanos en nuestras instalaciones en el corazón de Cusco
-                </p>
+                <h1 class="display-5 fw-bold mb-3">Nuestra Ubicación</h1>
+                <p class="lead mb-0">Visítanos en nuestras instalaciones en el corazón de Cusco</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Mapa Interactivo -->
-<section class="py-0">
+<section>
     <div id="map" style="height: 500px; width: 100%;"></div>
 </section>
 
-<!-- Información de Ubicación -->
-<section class="section-padding bg-light">
+<section class="py-5 bg-light">
     <div class="container">
         <div class="row g-4">
-            <!-- Oficina Principal -->
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-lg h-100">
+            <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow h-100 transition-all">
                     <div class="card-body p-4">
-                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                        <div class="bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
                              style="width: 60px; height: 60px;">
-                            <i class="fas fa-building text-primary fa-2x"></i>
+                            <i class="fas fa-building fa-2x"></i>
                         </div>
                         <h4 class="fw-bold mb-3">Oficina Principal</h4>
                         
@@ -79,13 +73,12 @@
                 </div>
             </div>
             
-            <!-- Almacén de Maquinaria -->
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-lg h-100">
+            <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow h-100 transition-all">
                     <div class="card-body p-4">
-                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                        <div class="bg-success text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
                              style="width: 60px; height: 60px;">
-                            <i class="fas fa-warehouse text-success fa-2x"></i>
+                            <i class="fas fa-warehouse fa-2x"></i>
                         </div>
                         <h4 class="fw-bold mb-3">Almacén Principal</h4>
                         
@@ -124,13 +117,12 @@
                 </div>
             </div>
             
-            <!-- Centro de Servicio Técnico -->
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-lg h-100">
+            <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow h-100 transition-all">
                     <div class="card-body p-4">
-                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                        <div class="bg-warning text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
                              style="width: 60px; height: 60px;">
-                            <i class="fas fa-tools text-warning fa-2x"></i>
+                            <i class="fas fa-tools fa-2x"></i>
                         </div>
                         <h4 class="fw-bold mb-3">Centro de Servicio</h4>
                         
@@ -173,22 +165,20 @@
     </div>
 </section>
 
-<!-- Cómo Llegar -->
-<section class="section-padding">
+<section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold mb-3">¿Cómo Llegar?</h2>
-            <p class="text-muted">Te indicamos las mejores rutas para llegar a nuestras instalaciones</p>
+            <h2 class="h1 fw-bold mb-3">¿Cómo Llegar?</h2>
+            <p class="text-muted lead">Te indicamos las mejores rutas para llegar a nuestras instalaciones</p>
         </div>
         
         <div class="row g-4">
-            <!-- En Auto -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-md-6">
                 <div class="card border-0 shadow-sm h-100 text-center">
                     <div class="card-body p-4">
-                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                        <div class="bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
                              style="width: 80px; height: 80px;">
-                            <i class="fas fa-car text-primary fa-3x"></i>
+                            <i class="fas fa-car fa-2x"></i>
                         </div>
                         <h5 class="fw-bold mb-3">En Auto</h5>
                         <p class="text-muted small mb-0">
@@ -199,13 +189,12 @@
                 </div>
             </div>
             
-            <!-- En Transporte Público -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-md-6">
                 <div class="card border-0 shadow-sm h-100 text-center">
                     <div class="card-body p-4">
-                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                        <div class="bg-success text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
                              style="width: 80px; height: 80px;">
-                            <i class="fas fa-bus text-success fa-3x"></i>
+                            <i class="fas fa-bus fa-2x"></i>
                         </div>
                         <h5 class="fw-bold mb-3">En Bus</h5>
                         <p class="text-muted small mb-0">
@@ -216,13 +205,12 @@
                 </div>
             </div>
             
-            <!-- En Taxi -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-md-6">
                 <div class="card border-0 shadow-sm h-100 text-center">
                     <div class="card-body p-4">
-                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                        <div class="bg-warning text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
                              style="width: 80px; height: 80px;">
-                            <i class="fas fa-taxi text-warning fa-3x"></i>
+                            <i class="fas fa-taxi fa-2x"></i>
                         </div>
                         <h5 class="fw-bold mb-3">En Taxi</h5>
                         <p class="text-muted small mb-0">
@@ -233,13 +221,12 @@
                 </div>
             </div>
             
-            <!-- A Pie -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-md-6">
                 <div class="card border-0 shadow-sm h-100 text-center">
                     <div class="card-body p-4">
-                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                        <div class="bg-info text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" 
                              style="width: 80px; height: 80px;">
-                            <i class="fas fa-walking text-info fa-3x"></i>
+                            <i class="fas fa-walking fa-2x"></i>
                         </div>
                         <h5 class="fw-bold mb-3">Caminando</h5>
                         <p class="text-muted small mb-0">
@@ -253,132 +240,21 @@
     </div>
 </section>
 
-<!-- Referencias Cercanas -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold mb-3">Referencias Cercanas</h2>
-            <p class="text-muted">Puntos de referencia para ubicarnos fácilmente</p>
-        </div>
-        
-        <div class="row g-4 align-items-center">
-            <div class="col-lg-6">
-                <div class="row g-3">
-                    <div class="col-12">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="bg-primary bg-opacity-10 rounded p-3 me-3">
-                                    <i class="fas fa-university text-primary fa-2x"></i>
-                                </div>
-                                <div>
-                                    <h6 class="fw-bold mb-1">Universidad UNSAAC</h6>
-                                    <small class="text-muted">A 2 cuadras de nuestra oficina</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="bg-success bg-opacity-10 rounded p-3 me-3">
-                                    <i class="fas fa-hospital text-success fa-2x"></i>
-                                </div>
-                                <div>
-                                    <h6 class="fw-bold mb-1">Hospital Regional</h6>
-                                    <small class="text-muted">A 5 minutos en auto</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="bg-warning bg-opacity-10 rounded p-3 me-3">
-                                    <i class="fas fa-shopping-cart text-warning fa-2x"></i>
-                                </div>
-                                <div>
-                                    <h6 class="fw-bold mb-1">Centro Comercial Real Plaza</h6>
-                                    <small class="text-muted">A 3 cuadras de distancia</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body d-flex align-items-center">
-                                <div class="bg-info bg-opacity-10 rounded p-3 me-3">
-                                    <i class="fas fa-gas-pump text-info fa-2x"></i>
-                                </div>
-                                <div>
-                                    <h6 class="fw-bold mb-1">Grifo Primax</h6>
-                                    <small class="text-muted">Frente a nuestras instalaciones</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-lg">
-                    <div class="card-body p-4">
-                        <h4 class="fw-bold mb-3">
-                            <i class="fas fa-map-signs me-2 text-primary"></i>
-                            Instrucciones Detalladas
-                        </h4>
-                        <ol class="mb-0">
-                            <li class="mb-3">
-                                <strong>Desde el Centro Histórico:</strong><br>
-                                <small class="text-muted">
-                                    Toma la Av. El Sol hasta llegar a la Av. La Cultura. 
-                                    Gira a la derecha y continúa 1.5 km.
-                                </small>
-                            </li>
-                            <li class="mb-3">
-                                <strong>Desde el Aeropuerto:</strong><br>
-                                <small class="text-muted">
-                                    Toma un taxi o transfer. Tiempo aproximado: 25 minutos. 
-                                    Costo aproximado: S/25-30.
-                                </small>
-                            </li>
-                            <li class="mb-3">
-                                <strong>Desde la Terminal Terrestre:</strong><br>
-                                <small class="text-muted">
-                                    Toma la Av. Pachacútec hasta la Av. La Cultura. 
-                                    Gira a la izquierda. 15 minutos en taxi.
-                                </small>
-                            </li>
-                            <li class="mb-0">
-                                <strong>Estacionamiento:</strong><br>
-                                <small class="text-muted">
-                                    Contamos con estacionamiento gratuito para 20 vehículos. 
-                                    Espacio para camiones y trailers disponible.
-                                </small>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contacto Rápido -->
-<section class="section-padding bg-primary text-white">
+<section class="py-5 bg-primary text-white">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8 mb-4 mb-lg-0">
-                <h3 class="fw-bold mb-3">¿No encuentras la dirección?</h3>
-                <p class="mb-0 opacity-75">
+                <h3 class="h2 fw-bold mb-3">¿No encuentras la dirección?</h3>
+                <p class="lead mb-0 opacity-75">
                     Llámanos y con gusto te ayudaremos a llegar a nuestras instalaciones. 
                     Estamos aquí para ayudarte.
                 </p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="tel:+51984123456" class="btn btn-light btn-lg mb-2 me-2">
+                <a href="tel:+51984123456" class="btn btn-light btn-lg px-4 py-3 fw-semibold me-2 mb-2">
                     <i class="fas fa-phone me-2"></i>+51 984 123 456
                 </a>
-                <a href="https://wa.me/51984123456" target="_blank" class="btn btn-success btn-lg mb-2">
+                <a href="https://wa.me/51984123456" target="_blank" class="btn btn-success btn-lg px-4 py-3 fw-semibold mb-2">
                     <i class="fab fa-whatsapp me-2"></i>WhatsApp
                 </a>
             </div>
@@ -389,50 +265,18 @@
 
 @push('styles')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<style>
-.leaflet-popup-content-wrapper {
-    border-radius: 8px;
-}
-.leaflet-popup-content {
-    margin: 15px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-</style>
 @endpush
 
 @push('scripts')
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// Inicializar el mapa centrado en Cusco
 const map = L.map('map').setView([-13.53195, -71.96746], 14);
 
-// Añadir capa de OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors',
     maxZoom: 19
 }).addTo(map);
 
-// Icono personalizado para las ubicaciones
-const iconOptions = {
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-};
-
-const greenIcon = L.icon({
-    ...iconOptions,
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png'
-});
-
-const yellowIcon = L.icon({
-    ...iconOptions,
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png'
-});
-
-// Marcador: Oficina Principal
 L.marker([-13.53195, -71.96746])
     .addTo(map)
     .bindPopup(`
@@ -447,8 +291,7 @@ L.marker([-13.53195, -71.96746])
         </div>
     `);
 
-// Marcador: Almacén Principal
-L.marker([-13.52500, -71.95000], {icon: greenIcon})
+L.marker([-13.52500, -71.95000])
     .addTo(map)
     .bindPopup(`
         <div class="text-center">
@@ -462,8 +305,7 @@ L.marker([-13.52500, -71.95000], {icon: greenIcon})
         </div>
     `);
 
-// Marcador: Centro de Servicio
-L.marker([-13.53500, -71.97000], {icon: yellowIcon})
+L.marker([-13.53500, -71.97000])
     .addTo(map)
     .bindPopup(`
         <div class="text-center">
@@ -476,13 +318,5 @@ L.marker([-13.53500, -71.97000], {icon: yellowIcon})
             </a>
         </div>
     `);
-
-// Dibujar un círculo alrededor de la zona de cobertura
-L.circle([-13.53195, -71.96746], {
-    color: '#1565C0',
-    fillColor: '#1565C0',
-    fillOpacity: 0.1,
-    radius: 3000
-}).addTo(map).bindPopup('Zona de cobertura principal');
 </script>
 @endpush

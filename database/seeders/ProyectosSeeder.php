@@ -6,9 +6,6 @@ use App\Models\Usuario;
 
 class ProyectosSeeder extends Seeder
 {
-    /**
-     * Ejecutar el seeder de proyectos.
-     */
     public function run(): void
     {
         $admin = Usuario::where('rol', 'admin')->first();
@@ -96,6 +93,6 @@ class ProyectosSeeder extends Seeder
             Proyecto::create($proyecto);
         }
 
-        $this->command->info('✓ Proyectos creados exitosamente');
+        $this->command->info('Proyectos creados exitosamente');
     }
 }

@@ -3,7 +3,6 @@
 @section('title', 'Panel de Administración - ETC Vallenas')
 
 @section('content')
-<!-- Header Section -->
 <section class="py-4 bg-primary text-white">
     <div class="container">
         <div class="row align-items-center">
@@ -18,10 +17,8 @@
     </div>
 </section>
 
-<!-- Dashboard Content -->
 <section class="section-padding">
     <div class="container">
-        <!-- Estadísticas Generales -->
         <div class="row g-4 mb-5">
             <div class="col-lg-3 col-md-6">
                 <div class="card border-0 shadow-sm h-100">
@@ -89,7 +86,6 @@
         </div>
         
         <div class="row g-4">
-            <!-- Gestión Principal -->
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body p-4">
@@ -98,7 +94,7 @@
                         </h5>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <a href="{{ route('admin.usuarios') }}" class="text-decoration-none">
+                                <a href="{{ route('admin.usuarios.index') }}" class="text-decoration-none">
                                     <div class="card border-0 bg-light h-100 hover-shadow">
                                         <div class="card-body text-center p-4">
                                             <i class="fas fa-users text-primary" style="font-size: 3rem;"></i>
@@ -110,7 +106,7 @@
                             </div>
                             
                             <div class="col-md-6">
-                                <a href="{{ route('admin.maquinaria') }}" class="text-decoration-none">
+                                <a href="{{ route('admin.maquinaria.index') }}" class="text-decoration-none">
                                     <div class="card border-0 bg-light h-100 hover-shadow">
                                         <div class="card-body text-center p-4">
                                             <i class="fas fa-truck-monster text-success" style="font-size: 3rem;"></i>
@@ -122,7 +118,7 @@
                             </div>
                             
                             <div class="col-md-6">
-                                <a href="{{ route('admin.proyectos') }}" class="text-decoration-none">
+                                <a href="{{ route('admin.proyectos.index') }}" class="text-decoration-none">
                                     <div class="card border-0 bg-light h-100 hover-shadow">
                                         <div class="card-body text-center p-4">
                                             <i class="fas fa-building text-warning" style="font-size: 3rem;"></i>
@@ -134,7 +130,7 @@
                             </div>
                             
                             <div class="col-md-6">
-                                <a href="{{ route('admin.servicios') }}" class="text-decoration-none">
+                                <a href="{{ route('admin.servicios.index') }}" class="text-decoration-none">
                                     <div class="card border-0 bg-light h-100 hover-shadow">
                                         <div class="card-body text-center p-4">
                                             <i class="fas fa-tools text-info" style="font-size: 3rem;"></i>
@@ -148,14 +144,13 @@
                     </div>
                 </div>
                 
-                <!-- Actividad Reciente -->
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-4">
                         <h5 class="fw-bold mb-4">
                             <i class="fas fa-history me-2"></i>Actividad Reciente del Sistema
                         </h5>
                         
-                        @if(isset($actividad_reciente) && count($actividad_reciente) > 0)
+                        @if($actividadReciente->count() > 0)
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -167,18 +162,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($actividad_reciente as $actividad)
+                                    @foreach($actividadReciente as $actividad)
                                     <tr>
-                                        <td>{{ $actividad['usuario'] }}</td>
+                                        <td>{{ $actividad->user->nombre_completo }}</td>
                                         <td>
-                                            <i class="fas fa-{{ $actividad['icono'] }} text-primary me-2"></i>
-                                            {{ $actividad['accion'] }}
+                                            <i class="fas fa-{{ $actividad->icono }} text-primary me-2"></i>
+                                            {{ $actividad->accion }}
                                         </td>
                                         <td>
-                                            <span class="badge bg-secondary">{{ $actividad['modulo'] }}</span>
+                                            <span class="badge bg-secondary">{{ $actividad->modulo }}</span>
                                         </td>
                                         <td class="text-muted small">
-                                            {{ \Carbon\Carbon::parse($actividad['fecha'])->diffForHumans() }}
+                                            {{ $actividad->created_at->diffForHumans() }}
                                         </td>
                                     </tr>
                                     @endforeach
@@ -195,32 +190,29 @@
                 </div>
             </div>
             
-            <!-- Sidebar -->
             <div class="col-lg-4">
-                <!-- Acciones Rápidas -->
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body p-4">
                         <h6 class="fw-bold mb-3">
                             <i class="fas fa-bolt me-2"></i>Acciones Rápidas
                         </h6>
                         <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-outline-primary text-start" data-bs-toggle="modal" data-bs-target="#nuevoUsuarioModal">
+                            <a href="{{ route('admin.usuarios.create') }}" class="btn btn-outline-primary text-start">
                                 <i class="fas fa-user-plus me-2"></i>Nuevo Usuario
-                            </button>
-                            <button type="button" class="btn btn-outline-success text-start" data-bs-toggle="modal" data-bs-target="#nuevaMaquinariaModal">
+                            </a>
+                            <a href="{{ route('admin.maquinaria.create') }}" class="btn btn-outline-success text-start">
                                 <i class="fas fa-plus me-2"></i>Nueva Maquinaria
-                            </button>
-                            <button type="button" class="btn btn-outline-warning text-start" data-bs-toggle="modal" data-bs-target="#nuevoProyectoModal">
+                            </a>
+                            <a href="{{ route('admin.proyectos.create') }}" class="btn btn-outline-warning text-start">
                                 <i class="fas fa-folder-plus me-2"></i>Nuevo Proyecto
-                            </button>
-                            <button type="button" class="btn btn-outline-info text-start" data-bs-toggle="modal" data-bs-target="#nuevoServicioModal">
+                            </a>
+                            <a href="{{ route('admin.servicios.create') }}" class="btn btn-outline-info text-start">
                                 <i class="fas fa-plus-circle me-2"></i>Nuevo Servicio
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Estadísticas Adicionales -->
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body p-4">
                         <h6 class="fw-bold mb-3">
@@ -265,7 +257,6 @@
                     </div>
                 </div>
                 
-                <!-- Información del Sistema -->
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-4">
                         <h6 class="fw-bold mb-3">
@@ -277,7 +268,7 @@
                         </div>
                         <div class="mb-2">
                             <small class="text-muted">Última actualización:</small>
-                            <span class="float-end"><strong>{{ date('d/m/Y') }}</strong></span>
+                            <span class="float-end"><strong>{{ now()->format('d/m/Y') }}</strong></span>
                         </div>
                         <div>
                             <small class="text-muted">Desarrollado por:</small>
@@ -290,3 +281,16 @@
     </div>
 </section>
 @endsection
+
+@push('styles')
+<style>
+.hover-shadow {
+    transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+</style>
+@endpush

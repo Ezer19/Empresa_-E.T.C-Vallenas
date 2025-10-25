@@ -9,11 +9,6 @@ class Proyecto extends Model
     protected $connection = 'mongodb';
     protected $collection = 'proyectos';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'nombre',
         'codigo',
@@ -50,11 +45,6 @@ class Proyecto extends Model
         'certificaciones_requeridas',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -79,53 +69,15 @@ class Proyecto extends Model
         ];
     }
 
-    /**
-     * Get responsable user
-     */
-    public function responsable()
+    public function getMainImageAttribute(): string
     {
-        return $this->belongsTo(Usuario::class, 'responsable_id');
-    }
-
-    /**
-     * Get maquinaria used in this project
-     */
-    public function maquinaria()
-    {
-        return $this->belongsToMany(Maquinaria::class, null, 'proyecto_ids', 'maquinaria_ids');
-    }
-
-    /**
-     * Check if project is active
-     */
-    public function isActive(): bool
-    {
-        return $this->estado === 'en_progreso';
-    }
-
-    /**
-     * Check if project is completed
-     */
-    public function isCompleted(): bool
-    {
-        return $this->estado === 'completado';
-    }
-
-    /**
-     * Check if project is delayed
-     */
-    public function isDelayed(): bool
-    {
-        if (!$this->fecha_estimada_fin) {
-            return false;
+        if (!empty($this->imagenes) && isset($this->imagenes[0])) {
+            return asset('storage/proyectos/' . $this->imagenes[0]);
         }
 
-        return now()->greaterThan($this->fecha_estimada_fin) && !$this->isCompleted();
+        return asset('assets/images/proyecto-placeholder.jpg');
     }
 
-    /**
-     * Get status badge class
-     */
     public function getStatusBadgeClassAttribute(): string
     {
         return match($this->estado) {
@@ -138,9 +90,6 @@ class Proyecto extends Model
         };
     }
 
-    /**
-     * Get priority badge class
-     */
     public function getPriorityBadgeClassAttribute(): string
     {
         return match($this->prioridad) {
@@ -151,21 +100,6 @@ class Proyecto extends Model
         };
     }
 
-    /**
-     * Get main image URL
-     */
-    public function getMainImageAttribute(): string
-    {
-        if (!empty($this->imagenes) && isset($this->imagenes[0])) {
-            return asset('storage/proyectos/' . $this->imagenes[0]);
-        }
-
-        return asset('assets/images/proyecto-placeholder.jpg');
-    }
-
-    /**
-     * Get budget status
-     */
     public function getBudgetStatusAttribute(): string
     {
         if (!$this->presupuesto || !$this->costo_actual) {
@@ -183,9 +117,6 @@ class Proyecto extends Model
         }
     }
 
-    /**
-     * Get days remaining
-     */
     public function getDaysRemainingAttribute(): ?int
     {
         if (!$this->fecha_estimada_fin) {
@@ -195,25 +126,45 @@ class Proyecto extends Model
         return now()->diffInDays($this->fecha_estimada_fin, false);
     }
 
-    /**
-     * Scope to get active projects
-     */
+    public function responsable()
+    {
+        return $this->belongsTo(Usuario::class, 'responsable_id');
+    }
+
+    public function maquinaria()
+    {
+        return $this->belongsToMany(Maquinaria::class, null, 'proyecto_ids', 'maquinaria_ids');
+    }
+
+    public function isActive(): bool
+    {
+        return $this->estado === 'en_progreso';
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this->estado === 'completado';
+    }
+
+    public function isDelayed(): bool
+    {
+        if (!$this->fecha_estimada_fin) {
+            return false;
+        }
+
+        return now()->greaterThan($this->fecha_estimada_fin) && !$this->isCompleted();
+    }
+
     public function scopeActive($query)
     {
         return $query->where('estado', 'en_progreso');
     }
 
-    /**
-     * Scope to filter by type
-     */
     public function scopeByType($query, $type)
     {
         return $query->where('tipo', $type);
     }
 
-    /**
-     * Scope to filter by status
-     */
     public function scopeByStatus($query, $status)
     {
         return $query->where('estado', $status);

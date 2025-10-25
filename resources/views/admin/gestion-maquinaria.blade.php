@@ -3,7 +3,6 @@
 @section('title', 'Gestión de Maquinaria - Admin')
 
 @section('content')
-<!-- Header Section -->
 <section class="py-4 bg-primary text-white">
     <div class="container">
         <div class="row align-items-center">
@@ -14,15 +13,14 @@
                 <p class="mb-0 opacity-75">Administrar equipos y maquinaria del sistema</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#nuevaMaquinariaModal">
+                <a href="{{ route('admin.maquinaria.create') }}" class="btn btn-light">
                     <i class="fas fa-plus me-2"></i>Nueva Maquinaria
-                </button>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Estadísticas Rápidas -->
 <section class="py-4 bg-light">
     <div class="container">
         <div class="row g-3">
@@ -35,7 +33,7 @@
                             </div>
                             <div>
                                 <h6 class="text-muted mb-0 small">Total Equipos</h6>
-                                <h3 class="fw-bold mb-0">{{ $total ?? 0 }}</h3>
+                                <h3 class="fw-bold mb-0">{{ $estadisticas['total'] }}</h3>
                             </div>
                         </div>
                     </div>
@@ -50,7 +48,7 @@
                             </div>
                             <div>
                                 <h6 class="text-muted mb-0 small">Disponibles</h6>
-                                <h3 class="fw-bold mb-0">{{ $disponibles ?? 0 }}</h3>
+                                <h3 class="fw-bold mb-0">{{ $estadisticas['disponibles'] }}</h3>
                             </div>
                         </div>
                     </div>
@@ -65,7 +63,7 @@
                             </div>
                             <div>
                                 <h6 class="text-muted mb-0 small">En Uso</h6>
-                                <h3 class="fw-bold mb-0">{{ $en_uso ?? 0 }}</h3>
+                                <h3 class="fw-bold mb-0">{{ $estadisticas['en_uso'] }}</h3>
                             </div>
                         </div>
                     </div>
@@ -80,7 +78,7 @@
                             </div>
                             <div>
                                 <h6 class="text-muted mb-0 small">Mantenimiento</h6>
-                                <h3 class="fw-bold mb-0">{{ $mantenimiento ?? 0 }}</h3>
+                                <h3 class="fw-bold mb-0">{{ $estadisticas['mantenimiento'] }}</h3>
                             </div>
                         </div>
                     </div>
@@ -90,12 +88,10 @@
     </div>
 </section>
 
-<!-- Tabla de Maquinaria -->
 <section class="section-padding">
     <div class="container">
         <div class="card border-0 shadow">
             <div class="card-body">
-                <!-- Filtros y Búsqueda -->
                 <div class="row mb-4">
                     <div class="col-lg-4 col-md-6 mb-3">
                         <input type="text" 
@@ -130,7 +126,6 @@
                     </div>
                 </div>
 
-                <!-- Tabla -->
                 <div class="table-responsive">
                     <table class="table table-hover" id="maquinariaTable">
                         <thead>
@@ -140,7 +135,7 @@
                                 <th>Tipo</th>
                                 <th>Marca/Modelo</th>
                                 <th>Año</th>
-                                <th>Disponibilidad</th>
+                                <th>Estado</th>
                                 <th>Tarifa/Día</th>
                                 <th>Acciones</th>
                             </tr>
@@ -148,27 +143,32 @@
                         <tbody>
                             @forelse($maquinaria as $equipo)
                             <tr>
-                                <td><small class="text-muted">#{{ substr($equipo->_id, -6) }}</small></td>
+                                <td><small class="text-muted">#{{ $equipo->id }}</small></td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        @if($equipo->imagenes && count($equipo->imagenes) > 0)
-                                        <img src="{{ asset('storage/maquinaria/' . $equipo->imagenes[0]) }}" 
+                                        @if($equipo->imagen_principal)
+                                        <img src="{{ Storage::url($equipo->imagen_principal) }}" 
                                              alt="{{ $equipo->nombre }}"
                                              class="rounded me-2"
                                              style="width: 40px; height: 40px; object-fit: cover;">
+                                        @else
+                                        <div class="bg-light rounded me-2 d-flex align-items-center justify-content-center"
+                                             style="width: 40px; height: 40px;">
+                                            <i class="fas fa-truck-monster text-muted"></i>
+                                        </div>
                                         @endif
                                         <strong>{{ $equipo->nombre }}</strong>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge bg-secondary">{{ ucfirst($equipo->tipo) }}</span>
+                                    <span class="badge bg-secondary">{{ $equipo->tipo_label }}</span>
                                 </td>
                                 <td>{{ $equipo->marca }} / {{ $equipo->modelo }}</td>
                                 <td>{{ $equipo->año }}</td>
                                 <td>
-                                    @if($equipo->disponibilidad == 'disponible')
+                                    @if($equipo->estado == 'disponible')
                                     <span class="badge bg-success">Disponible</span>
-                                    @elseif($equipo->disponibilidad == 'en_uso')
+                                    @elseif($equipo->estado == 'en_uso')
                                     <span class="badge bg-warning">En uso</span>
                                     @else
                                     <span class="badge bg-danger">Mantenimiento</span>
@@ -183,21 +183,20 @@
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('maquinaria.show', $equipo->_id) }}" 
+                                        <a href="{{ route('maquinaria.show', $equipo->slug) }}" 
                                            class="btn btn-outline-info" 
                                            target="_blank"
                                            title="Ver">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <button type="button" 
-                                                class="btn btn-outline-primary" 
-                                                onclick="editarMaquinaria('{{ $equipo->_id }}')"
-                                                title="Editar">
+                                        <a href="{{ route('admin.maquinaria.edit', $equipo->id) }}" 
+                                           class="btn btn-outline-primary" 
+                                           title="Editar">
                                             <i class="fas fa-edit"></i>
-                                        </button>
+                                        </a>
                                         <button type="button" 
                                                 class="btn btn-outline-danger" 
-                                                onclick="eliminarMaquinaria('{{ $equipo->_id }}', '{{ $equipo->nombre }}')"
+                                                onclick="eliminarMaquinaria('{{ $equipo->id }}', '{{ $equipo->nombre }}')"
                                                 title="Eliminar">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -209,6 +208,9 @@
                                 <td colspan="8" class="text-center py-5">
                                     <i class="fas fa-inbox text-muted" style="font-size: 3rem;"></i>
                                     <p class="text-muted mt-3">No hay maquinaria registrada</p>
+                                    <a href="{{ route('admin.maquinaria.create') }}" class="btn btn-primary mt-2">
+                                        <i class="fas fa-plus me-2"></i>Agregar Primer Equipo
+                                    </a>
                                 </td>
                             </tr>
                             @endforelse
@@ -216,8 +218,7 @@
                     </table>
                 </div>
 
-                <!-- Paginación -->
-                @if(isset($maquinaria) && $maquinaria->hasPages())
+                @if($maquinaria->hasPages())
                 <div class="mt-4 d-flex justify-content-center">
                     {{ $maquinaria->links() }}
                 </div>
@@ -227,136 +228,14 @@
     </div>
 </section>
 
-<!-- Modal Nueva/Editar Maquinaria -->
-<div class="modal fade" id="nuevaMaquinariaModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="fas fa-truck-monster me-2"></i>
-                    <span id="modalTitle">Nueva Maquinaria</span>
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <form id="maquinariaForm" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" id="maquinaria_id" name="maquinaria_id">
-                <input type="hidden" id="form_method" name="_method" value="POST">
-                
-                <div class="modal-body">
-                    <div class="row g-3">
-                        <div class="col-md-12">
-                            <label class="form-label">Nombre del Equipo <span class="text-danger">*</span></label>
-                            <input type="text" name="nombre" class="form-control" required>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Tipo <span class="text-danger">*</span></label>
-                            <select name="tipo" class="form-select" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="excavadora">Excavadora</option>
-                                <option value="retroexcavadora">Retroexcavadora</option>
-                                <option value="cargador">Cargador</option>
-                                <option value="motoniveladora">Motoniveladora</option>
-                                <option value="rodillo">Rodillo</option>
-                                <option value="volquete">Volquete</option>
-                                <option value="grua">Grúa</option>
-                                <option value="otro">Otro</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Disponibilidad <span class="text-danger">*</span></label>
-                            <select name="disponibilidad" class="form-select" required>
-                                <option value="disponible">Disponible</option>
-                                <option value="en_uso">En uso</option>
-                                <option value="mantenimiento">Mantenimiento</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-md-4">
-                            <label class="form-label">Marca <span class="text-danger">*</span></label>
-                            <input type="text" name="marca" class="form-control" required>
-                        </div>
-                        
-                        <div class="col-md-4">
-                            <label class="form-label">Modelo <span class="text-danger">*</span></label>
-                            <input type="text" name="modelo" class="form-control" required>
-                        </div>
-                        
-                        <div class="col-md-4">
-                            <label class="form-label">Año <span class="text-danger">*</span></label>
-                            <input type="number" name="año" class="form-control" min="1990" max="2030" required>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Potencia</label>
-                            <input type="text" name="potencia" class="form-control" placeholder="Ej: 150 HP">
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Capacidad</label>
-                            <input type="text" name="capacidad" class="form-control" placeholder="Ej: 1.5 m³">
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Peso</label>
-                            <input type="text" name="peso" class="form-control" placeholder="Ej: 20 ton">
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Dimensiones</label>
-                            <input type="text" name="dimensiones" class="form-control" placeholder="Ej: 6m x 2.5m x 3m">
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Tarifa por Hora (S/)</label>
-                            <input type="number" name="tarifa_hora" class="form-control" step="0.01" min="0">
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Tarifa por Día (S/)</label>
-                            <input type="number" name="tarifa_dia" class="form-control" step="0.01" min="0">
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Tarifa por Semana (S/)</label>
-                            <input type="number" name="tarifa_semana" class="form-control" step="0.01" min="0">
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label class="form-label">Tarifa por Mes (S/)</label>
-                            <input type="number" name="tarifa_mes" class="form-control" step="0.01" min="0">
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <label class="form-label">Descripción</label>
-                            <textarea name="descripcion" class="form-control" rows="3"></textarea>
-                        </div>
-                        
-                        <div class="col-md-12">
-                            <label class="form-label">Imágenes</label>
-                            <input type="file" name="imagenes[]" class="form-control" multiple accept="image/*">
-                            <small class="text-muted">Puedes seleccionar múltiples imágenes</small>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>Guardar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<form id="deleteForm" method="POST" style="display: none;">
+    @csrf
+    @method('DELETE')
+</form>
 @endsection
 
 @push('scripts')
 <script>
-// Búsqueda y filtros
 document.getElementById('searchInput').addEventListener('keyup', filterTable);
 document.getElementById('tipoFilter').addEventListener('change', filterTable);
 document.getElementById('estadoFilter').addEventListener('change', filterTable);
@@ -392,22 +271,10 @@ function resetFilters() {
     filterTable();
 }
 
-// Editar maquinaria
-function editarMaquinaria(id) {
-    // Aquí cargarías los datos mediante AJAX
-    document.getElementById('modalTitle').textContent = 'Editar Maquinaria';
-    document.getElementById('maquinaria_id').value = id;
-    document.getElementById('form_method').value = 'PUT';
-    document.getElementById('maquinariaForm').action = `/admin/maquinaria/${id}`;
-    
-    new bootstrap.Modal(document.getElementById('nuevaMaquinariaModal')).show();
-}
-
-// Eliminar maquinaria
 function eliminarMaquinaria(id, nombre) {
     Swal.fire({
         title: '¿Estás seguro?',
-        text: `Se eliminará la maquinaria: ${nombre}`,
+        text: `Se eliminará la maquinaria: ${nombre}. Esta acción no se puede deshacer.`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -416,36 +283,11 @@ function eliminarMaquinaria(id, nombre) {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            // Crear formulario para DELETE
-            const form = document.createElement('form');
-            form.method = 'POST';
+            const form = document.getElementById('deleteForm');
             form.action = `/admin/maquinaria/${id}`;
-            
-            const csrfToken = document.createElement('input');
-            csrfToken.type = 'hidden';
-            csrfToken.name = '_token';
-            csrfToken.value = '{{ csrf_token() }}';
-            
-            const methodField = document.createElement('input');
-            methodField.type = 'hidden';
-            methodField.name = '_method';
-            methodField.value = 'DELETE';
-            
-            form.appendChild(csrfToken);
-            form.appendChild(methodField);
-            document.body.appendChild(form);
             form.submit();
         }
     });
 }
-
-// Limpiar formulario al cerrar modal
-document.getElementById('nuevaMaquinariaModal').addEventListener('hidden.bs.modal', function () {
-    document.getElementById('modalTitle').textContent = 'Nueva Maquinaria';
-    document.getElementById('maquinariaForm').reset();
-    document.getElementById('maquinaria_id').value = '';
-    document.getElementById('form_method').value = 'POST';
-    document.getElementById('maquinariaForm').action = '/admin/maquinaria';
-});
 </script>
 @endpush
