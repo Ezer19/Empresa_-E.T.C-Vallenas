@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Servicio extends Model
 {
-    protected $connection = 'mongodb';
-    protected $collection = 'servicios';
+    use HasFactory;
+
+    protected $table = 'servicios';
 
     protected $fillable = [
         'nombre',
@@ -97,7 +99,7 @@ class Servicio extends Model
 
     public function getIconClassAttribute(): string
     {
-        return match($this->tipo) {
+        return match ($this->tipo) {
             'alquiler' => 'fa-truck-monster',
             'mantenimiento' => 'fa-tools',
             'construccion' => 'fa-hard-hat',
@@ -108,7 +110,7 @@ class Servicio extends Model
 
     public function getTypeBadgeClassAttribute(): string
     {
-        return match($this->tipo) {
+        return match ($this->tipo) {
             'alquiler' => 'bg-primary',
             'mantenimiento' => 'bg-warning',
             'construccion' => 'bg-success',
@@ -141,7 +143,7 @@ class Servicio extends Model
     public function scopeActive($query)
     {
         return $query->where('estado', 'activo')
-                     ->where('disponibilidad', 'disponible');
+            ->where('disponibilidad', 'disponible');
     }
 
     public function scopeByType($query, $type)
@@ -157,8 +159,8 @@ class Servicio extends Model
     public function scopePopular($query, $limit = 6)
     {
         return $query->where('estado', 'activo')
-                     ->orderBy('popularidad', 'desc')
-                     ->limit($limit);
+            ->orderBy('popularidad', 'desc')
+            ->limit($limit);
     }
 
     public function scopeOrdered($query)

@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 use App\Models\Proyecto;
 use App\Models\Usuario;
 
@@ -22,26 +25,26 @@ class ProyectosSeeder extends Seeder
                     'lat' => -13.4219,
                     'lng' => -71.9680
                 ],
-                'fecha_inicio' => now()->subMonths(6),
-                'fecha_estimada_fin' => now()->addMonths(6),
+                'fecha_inicio' => Carbon::now()->subMonths(6),
+                'fecha_estimada_fin' => Carbon::now()->addMonths(6),
                 'estado' => 'en_progreso',
                 'avance_porcentaje' => 65,
                 'presupuesto' => 15000000,
                 'costo_actual' => 9500000,
                 'moneda' => 'PEN',
-                'responsable_id' => $admin->_id,
-                'responsable_nombre' => $admin->nombre_completo,
+                'responsable_id' => optional($admin)->id,
+                'responsable_nombre' => optional($admin)->nombre . ' ' . optional($admin)->apellido,
                 'equipo' => [
                     ['nombre' => 'Carlos Mendoza', 'cargo' => 'Jefe de Proyecto'],
                     ['nombre' => 'Ana Torres', 'cargo' => 'Ingeniera Civil'],
                     ['nombre' => 'Luis Vargas', 'cargo' => 'Supervisor de Obra'],
                 ],
                 'hitos' => [
-                    ['nombre' => 'Movilización', 'fecha' => now()->subMonths(6), 'completado' => true],
-                    ['nombre' => 'Movimiento de tierras', 'fecha' => now()->subMonths(4), 'completado' => true],
-                    ['nombre' => 'Base y sub-base', 'fecha' => now()->subMonths(2), 'completado' => true],
-                    ['nombre' => 'Asfaltado', 'fecha' => now()->addMonths(2), 'completado' => false],
-                    ['nombre' => 'Señalización', 'fecha' => now()->addMonths(5), 'completado' => false],
+                    ['nombre' => 'Movilización', 'fecha' => Carbon::now()->subMonths(6), 'completado' => true],
+                    ['nombre' => 'Movimiento de tierras', 'fecha' => Carbon::now()->subMonths(4), 'completado' => true],
+                    ['nombre' => 'Base y sub-base', 'fecha' => Carbon::now()->subMonths(2), 'completado' => true],
+                    ['nombre' => 'Asfaltado', 'fecha' => Carbon::now()->addMonths(2), 'completado' => false],
+                    ['nombre' => 'Señalización', 'fecha' => Carbon::now()->addMonths(5), 'completado' => false],
                 ],
             ],
             [
@@ -55,8 +58,8 @@ class ProyectosSeeder extends Seeder
                     'lat' => -16.4897,
                     'lng' => -71.6517
                 ],
-                'fecha_inicio' => now()->subMonths(3),
-                'fecha_estimada_fin' => now()->addMonths(9),
+                'fecha_inicio' => Carbon::now()->subMonths(3),
+                'fecha_estimada_fin' => Carbon::now()->addMonths(9),
                 'estado' => 'en_progreso',
                 'avance_porcentaje' => 40,
                 'presupuesto' => 8500000,
@@ -76,9 +79,9 @@ class ProyectosSeeder extends Seeder
                     'lat' => -12.0464,
                     'lng' => -77.0428
                 ],
-                'fecha_inicio' => now()->subMonths(12),
-                'fecha_estimada_fin' => now()->subMonths(2),
-                'fecha_fin' => now()->subMonths(2),
+                'fecha_inicio' => Carbon::now()->subMonths(12),
+                'fecha_estimada_fin' => Carbon::now()->subMonths(2),
+                'fecha_fin' => Carbon::now()->subMonths(2),
                 'estado' => 'completado',
                 'avance_porcentaje' => 100,
                 'presupuesto' => 2500000,

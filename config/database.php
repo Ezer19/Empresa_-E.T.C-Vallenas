@@ -1,20 +1,20 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
-    'default' => env('DB_CONNECTION', 'mongodb'),
-    
+    'default' => env('DB_CONNECTION', 'mysql'),
+
     'connections' => [
-        'mongodb' => [
-            'driver' => 'mongodb',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE', 'etc_vallenas'),
-            'username' => env('DB_USERNAME'),
-            'password' => env('DB_PASSWORD'),
-            'options' => [
-                'appname' => 'ETC Vallenas',
-            ],
+        'sqlite' => [
+            'driver' => 'sqlite',
+            'url' => env('DATABASE_URL'),
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix' => '',
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
+
+        // Eliminado soporte MongoDB: el proyecto utiliza MySQL
 
         'mysql' => [
             'driver' => 'mysql',
@@ -41,10 +41,10 @@ return [
 
     'redis' => [
         'client' => env('REDIS_CLIENT', 'phpredis'),
-        
+
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [

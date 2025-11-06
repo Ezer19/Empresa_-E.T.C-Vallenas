@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
     plugins: [
@@ -18,14 +18,14 @@ export default defineConfig({
         },
     },
     build: {
-        manifest: true,
+        // Generate manifest at public/build/manifest.json to match Laravel's default lookup
+        manifest: 'manifest.json',
         outDir: 'public/build',
         rollupOptions: {
             output: {
                 manualChunks: {
                     'vendor': ['alpinejs'],
-                    'bootstrap': ['bootstrap'],
-                    'charts': ['chart.js'],
+                    'bootstrap': ['bootstrap']
                 }
             }
         }

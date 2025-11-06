@@ -1,9 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Carbon;
 
 class UsuariosSeeder extends Seeder
 {
@@ -20,8 +21,7 @@ class UsuariosSeeder extends Seeder
                 'estado' => 'activo',
                 'empresa' => 'ETC Vallenas',
                 'cargo' => 'Director General',
-                'verificado' => true,
-                'verificado_at' => now(),
+                'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -35,8 +35,7 @@ class UsuariosSeeder extends Seeder
                 'estado' => 'activo',
                 'empresa' => 'ETC Vallenas',
                 'cargo' => 'Gerente de Operaciones',
-                'verificado' => true,
-                'verificado_at' => now(),
+                'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -50,8 +49,7 @@ class UsuariosSeeder extends Seeder
                 'estado' => 'activo',
                 'empresa' => 'ETC Vallenas',
                 'cargo' => 'Operador de Maquinaria',
-                'verificado' => true,
-                'verificado_at' => now(),
+                'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

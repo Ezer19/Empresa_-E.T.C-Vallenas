@@ -127,7 +127,6 @@ _ide_helper.php
 
 # Composer
 composer.phar
-composer.lock
 
 # Laravel specific
 /storage/clockwork/

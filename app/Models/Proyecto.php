@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Proyecto extends Model
 {
-    protected $connection = 'mongodb';
-    protected $collection = 'proyectos';
+    use HasFactory;
+
+    protected $table = 'proyectos';
 
     protected $fillable = [
         'nombre',
@@ -80,7 +82,7 @@ class Proyecto extends Model
 
     public function getStatusBadgeClassAttribute(): string
     {
-        return match($this->estado) {
+        return match ($this->estado) {
             'planificacion' => 'bg-info',
             'en_progreso' => 'bg-primary',
             'pausado' => 'bg-warning',
@@ -92,7 +94,7 @@ class Proyecto extends Model
 
     public function getPriorityBadgeClassAttribute(): string
     {
-        return match($this->prioridad) {
+        return match ($this->prioridad) {
             'alta' => 'bg-danger',
             'media' => 'bg-warning',
             'baja' => 'bg-info',

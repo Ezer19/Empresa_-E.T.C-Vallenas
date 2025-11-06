@@ -1,10 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
     font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -184,6 +184,24 @@ body {
 .nav-link:hover {
     color: #1565C0;
 }
+
+/* Asegurar visibilidad de los enlaces del navbar sobre fondo blanco */
+.navbar-light .navbar-nav .nav-link {
+    color: #0d0d0d !important;
+}
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .show > .nav-link {
+    color: #ffffff !important;
+}
+.navbar .nav-link.bg-primary {
+    color: #ffffff !important;
+}
+
+/* Menú siempre visible y adaptable */
+.navbar-nav {
+    flex-wrap: wrap;
+}
+.navbar .navbar-brand img { max-height: 55px; height: 55px; }
 
 footer h5 {
     font-weight: 700;
@@ -367,36 +385,44 @@ footer a:hover {
     .section-title {
         font-size: 2rem;
     }
-    
+
     .carousel-item {
         height: 400px;
     }
-    
+
     .hero {
         min-height: 400px;
     }
-    
+
     .section-padding {
         padding: 3rem 0;
     }
-    
+
     .btn {
         padding: 0.625rem 1.25rem;
     }
+
+    /* Mejoras de navbar en pantallas pequeñas */
+    .navbar .navbar-brand img { height: 48px; max-height: 48px; }
+    .navbar-nav { gap: .25rem; }
 }
 
 @media (max-width: 576px) {
     .section-title {
         font-size: 1.75rem;
     }
-    
+
     .section-subtitle {
         font-size: 1rem;
     }
-    
+
     .stat-item {
         padding: 1.5rem;
     }
+
+    /* Ajustes extra para móvil */
+    .navbar .navbar-brand img { height: 42px; max-height: 42px; }
+    .navbar-nav { gap: .25rem; }
 }
 
 .print-only {
@@ -407,11 +433,11 @@ footer a:hover {
     .no-print {
         display: none !important;
     }
-    
+
     .print-only {
         display: block;
     }
-    
+
     .card {
         break-inside: avoid;
     }

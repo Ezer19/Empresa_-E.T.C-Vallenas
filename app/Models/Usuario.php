@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Usuario extends Model implements AuthenticatableContract
 {
-    use Authenticatable, Notifiable;
+    use Authenticatable, Notifiable, HasFactory;
 
-    protected $connection = 'mongodb';
-    protected $collection = 'usuarios';
+    protected $table = 'usuarios';
 
     protected $fillable = [
         'nombre',
@@ -55,7 +55,7 @@ class Usuario extends Model implements AuthenticatableContract
         if ($this->avatar) {
             return asset('storage/avatars/' . $this->avatar);
         }
-        
+
         $hash = md5(strtolower(trim($this->email)));
         return "https://www.gravatar.com/avatar/{$hash}?d=mp&s=200";
     }

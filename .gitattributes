@@ -1,0 +1,14 @@
+# Normalize line endings across platforms
+* text=auto
+
+# Shell scripts should keep LF
+*.sh text eol=lf
+
+# Batch scripts use CRLF on Windows
+*.bat text eol=crlf
+
+# Treat compiled assets as binary (avoid noisy diffs)
+public/build/* binary
+
+# Improve language detection for Blade templates
+*.blade.php linguist-language=Blade

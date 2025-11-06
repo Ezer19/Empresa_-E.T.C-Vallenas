@@ -4,7 +4,7 @@
   <img src="https://thumbs.dreamstime.com/b/dise%C3%B1o-del-logotipo-de-construcci%C3%B3n-excavaci%C3%B3n-elemento-equipo-pesado-miner%C3%ADa-veh%C3%ADculos-transporte-389775260.jpg" alt="ETC Vallenas Logo" width="200"/>
   
   [![Laravel](https://img.shields.io/badge/Laravel-10.x-red.svg)](https://laravel.com)
-  [![MongoDB](https://img.shields.io/badge/MongoDB-7.0-green.svg)](https://www.mongodb.com/)
+   [![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)](https://www.mysql.com/)
   [![TailwindCSS](https://img.shields.io/badge/Tailwind-3.3-blue.svg)](https://tailwindcss.com)
   [![License](https://img.shields.io/badge/License-Proprietary-yellow.svg)](LICENSE)
 </div>
@@ -23,18 +23,18 @@ Sistema integral de gestión para **ETC Vallenas**, empresa líder en alquiler d
 ## Características Principales
 
 ### Frontend
-- Diseño moderno con **Tailwind CSS** y **Bootstrap 5**
+- **Base de Datos** | MySQL 8.0+ |
 - Interfaz responsive y accesible (WCAG 2.1)
 - Carrusel de imágenes con hero section
 - Formularios de contacto y cotización
 - Blog de noticias del sector
 - SEO optimizado con meta tags completos
 - PWA (Progressive Web App) ready
-- Iconos Font Awesome 6
-
-### Backend
-- Laravel 10 con arquitectura MVC
-- MongoDB para base de datos NoSQL
+ PHP >= 8.1
+ Composer
+ Node.js >= 18.x
+ MySQL 8.0+
+ NPM
 - Sistema de autenticación robusto
 - Roles y permisos (Admin, Operador, Cliente)
 - API RESTful para integraciones
@@ -78,8 +78,8 @@ Sistema integral de gestión para **ETC Vallenas**, empresa líder en alquiler d
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/Ezer19/Empresa_-E.T.C-Vallenas.git
-cd Empresa_-E.T.C-Vallenas
+ git clone https://github.com/EzerZuniga/vallenas-rental-system.git
+ cd vallenas-rental-system
 ```
 
 2. **Instalar dependencias PHP**
@@ -98,13 +98,13 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-5. **Configurar MongoDB en .env**
+5. **Configurar MySQL en .env**
 ```env
-DB_CONNECTION=mongodb
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_PORT=27017
+DB_PORT=3306
 DB_DATABASE=etc_vallenas
-DB_USERNAME=
+DB_USERNAME=root
 DB_PASSWORD=
 ```
 
@@ -117,6 +117,12 @@ npm run build
 ```bash
 php artisan serve
 npm run dev
+```
+
+Nota: Los assets de producción en `public/build/` no se versionan. Genera el build cuando despliegues con:
+
+```bash
+npm run build
 ```
 
 8. **Acceder a la aplicación**
@@ -132,7 +138,7 @@ etc-vallenas-web/
 │   ├── Http/
 │   │   ├── Controllers/      # Controladores
 │   │   └── Middleware/       # Middlewares personalizados
-│   ├── Models/               # Modelos Eloquent MongoDB
+│   ├── Models/               # Modelos Eloquent (MySQL)
 │   └── Providers/            # Service Providers
 ├── config/                   # Archivos de configuración
 ├── database/
@@ -263,14 +269,12 @@ php artisan test --filter=UsuarioTest
 
 ## Scripts Disponibles
 
-```json
-{
-  "dev": "Servidor de desarrollo con hot reload",
-  "build": "Compilar para producción",
-  "preview": "Vista previa de build",
-  "watch": "Watch mode para desarrollo"
-}
-```
+- dev: servidor con hot reload (Vite)
+- build: compilar assets para producción
+- preview: vista previa del build
+- watch: build en modo watch
+- lint: revisar formato con Prettier
+- format: formatear el código con Prettier
 
 ## Contribución
 
@@ -283,10 +287,10 @@ Este es un proyecto privado de **ETC Vallenas**. Para contribuir:
 
 ## Licencia
 
-**Propietario**: ETC Vallenas  
-**Copyright**: © 2025 E.T.C. Vallenas - Todos los derechos reservados
+**Propietario**: E.T.C Vallenas  
+**Copyright**: © 2025 E.T.C Vallenas - Todos los derechos reservados
 
-Este software es propiedad exclusiva de ETC Vallenas y está protegido por leyes de derechos de autor.
+Este software es propiedad exclusiva de la empresa E.T.C Vallenas y está protegido por leyes de derechos de autor "Fernando Alonso Vallenas Saraya".
 
 ## Desarrollador
 
@@ -298,7 +302,7 @@ Este software es propiedad exclusiva de ETC Vallenas y está protegido por leyes
     </a>
   </p>
   <p>
-    Email: ezerzuniga.dev@gmail.com<br>
+    Email: ezerzuniga@gmail.com<br>
     Instagram: @ezerzuniga.oficial16
   </p>
 </div>

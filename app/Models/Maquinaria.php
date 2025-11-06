@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Maquinaria extends Model
 {
-    protected $connection = 'mongodb';
-    protected $collection = 'maquinaria';
+    use HasFactory;
+
+    protected $table = 'maquinaria';
 
     protected $fillable = [
         'nombre',
@@ -76,7 +78,7 @@ class Maquinaria extends Model
 
     public function getStatusBadgeClassAttribute(): string
     {
-        return match($this->estado) {
+        return match ($this->estado) {
             'operativo' => 'bg-success',
             'mantenimiento' => 'bg-warning',
             'reparacion' => 'bg-danger',
@@ -87,7 +89,7 @@ class Maquinaria extends Model
 
     public function getAvailabilityBadgeClassAttribute(): string
     {
-        return match($this->disponibilidad) {
+        return match ($this->disponibilidad) {
             'disponible' => 'bg-success',
             'alquilado' => 'bg-primary',
             'reservado' => 'bg-info',
@@ -118,7 +120,7 @@ class Maquinaria extends Model
     public function scopeAvailable($query)
     {
         return $query->where('disponibilidad', 'disponible')
-                     ->where('estado', 'operativo');
+            ->where('estado', 'operativo');
     }
 
     public function scopeByType($query, $type)

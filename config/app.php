@@ -41,7 +41,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        MongoDB\Laravel\MongoDBServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
 
         App\Providers\AppServiceProvider::class,
