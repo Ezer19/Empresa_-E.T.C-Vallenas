@@ -1,4 +1,4 @@
-#  ETC Vallenas - Sistema de Gestión de Maquinaria Pesada
+#  ETC VALLENAS - Sistema de Gestión de Maquinaria Pesada
 
 <div align="center">
   <img src="https://thumbs.dreamstime.com/b/dise%C3%B1o-del-logotipo-de-construcci%C3%B3n-excavaci%C3%B3n-elemento-equipo-pesado-miner%C3%ADa-veh%C3%ADculos-transporte-389775260.jpg" alt="ETC Vallenas Logo" width="200"/>
