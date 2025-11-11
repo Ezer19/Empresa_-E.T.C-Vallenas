@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'ETC Vallenas - Alquiler de Maquinaria Pesada | Cusco, Perú')
-@section('description', 'Empresa líder en alquiler de maquinaria pesada en Cusco. Más de 15 años de experiencia en
+@section('description',
+    'Empresa líder en alquiler de maquinaria pesada en Cusco. Más de 15 años de experiencia en
     construcción, minería y proyectos industriales.')
 
     @push('styles')
@@ -30,22 +31,23 @@
     @endpush
 
 @section('content')
-    <!-- Hero Section -->
+    <!-- Hero estilo Maquiperu: navy con tipografía fuerte y CTA naranja -->
     <section class="bg-gradient-primary text-white py-5">
         <div class="container py-5">
             <div class="row align-items-center min-vh-50">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="display-4 fw-bold mb-4">ETC Vallenas</h1>
-                    <p class="lead mb-4 fs-5">
-                        Líderes en alquiler de maquinaria pesada en Cusco con más de 15 años de experiencia
+                    <h1 class="display-4 fw-extrabold mb-3" style="letter-spacing:.5px">
+                        Maquinarias que impulsan tus proyectos
+                    </h1>
+                    <p class="lead mb-4 fs-5 text-white-75">
+                        ETC Vallenas | Alquiler de maquinaria pesada en Cusco con más de 15 años de experiencia.
                     </p>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="{{ route('maquinaria.index') }}" class="btn btn-primary btn-lg px-4 py-3 fw-semibold">
+                            <i class="fas fa-truck-monster me-2"></i>Ver Maquinaria
+                        </a>
                         <a href="{{ route('contacto.index') }}" class="btn btn-light btn-lg px-4 py-3 fw-semibold">
                             <i class="fas fa-paper-plane me-2"></i>Solicitar Cotización
-                        </a>
-                        <a href="{{ route('maquinaria.index') }}"
-                            class="btn btn-outline-light btn-lg px-4 py-3 fw-semibold">
-                            <i class="fas fa-truck-monster me-2"></i>Ver Maquinaria
                         </a>
                     </div>
                 </div>
@@ -100,13 +102,13 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-5 bg-primary text-white">
+    <!-- CTA Section con acento naranja -->
+    <section class="py-5 text-white" style="background: linear-gradient(90deg, var(--brand-orange) 0%, #f18a52 100%);">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <h3 class="fw-bold mb-3">¿Listo para comenzar tu proyecto?</h3>
-                    <p class="mb-0">Contáctanos hoy mismo y recibe una cotización personalizada</p>
+                    <h3 class="fw-bold mb-2">¿Listo para empezar?</h3>
+                    <p class="mb-0">Solicita una cotización y te asesoramos en minutos.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
                     <a href="{{ route('contacto.index') }}" class="btn btn-light btn-lg px-4 py-3 fw-semibold">
@@ -116,5 +118,4 @@
             </div>
         </div>
     </section>
-    </main>
 @endsection

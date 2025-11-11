@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white pt-5 pb-4">
+<footer class="bg-dark text-white pt-5 pb-4" style="border-top: 4px solid var(--brand-orange);">
     <div class="container">
         <div class="row g-4">
             <div class="col-xl-4 col-md-6">
@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        <hr class="my-4 bg-secondary">
+        <hr class="my-4" style="border-color: rgba(255,255,255,.12)">
         <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
                 <p class="mb-0 text-white-50">
@@ -101,7 +101,7 @@
                 <p class="mb-0 text-white-50">
                     Desarrollado por
                     <a href="https://instagram.com/ezerzuniga.oficial16" target="_blank"
-                        class="text-primary text-decoration-none fw-semibold">
+                        class="text-decoration-none fw-semibold" style="color: var(--brand-orange)">
                         Ezer Zuñiga
                     </a>
                 </p>
@@ -116,7 +116,7 @@
     }
 
     .transition-all:hover {
-        color: #0d6efd !important;
+        color: var(--brand-orange) !important;
         transform: translateX(5px)
     }
 
@@ -129,8 +129,8 @@
     }
 
     .btn-outline-light.rounded-circle:hover {
-        background-color: #0d6efd;
-        border-color: #0d6efd;
+        background-color: var(--brand-orange);
+        border-color: var(--brand-orange);
         transform: translateY(-2px)
     }
 </style>

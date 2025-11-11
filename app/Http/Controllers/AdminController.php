@@ -77,4 +77,4 @@ class AdminController extends Controller
 
         return view('admin.reportes', compact('stats_periodo', 'fecha_inicio', 'fecha_fin'));
     }
-} 
+}

@@ -21,6 +21,14 @@ export default {
                     800: '#0D47A1',
                     900: '#0d47a1',
                 },
+                brandnavy: {
+                    DEFAULT: '#0b1b2e',
+                    dark: '#091521'
+                },
+                brandorange: {
+                    DEFAULT: '#ef6c2c',
+                    dark: '#d95c1f'
+                },
                 secondary: {
                     50: '#fff8e1',
                     100: '#ffecb3',
@@ -53,6 +61,7 @@ export default {
             fontFamily: {
                 sans: ['Inter', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
                 display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                brand: ['Inter', 'Plus Jakarta Sans', 'system-ui', 'sans-serif']
             },
             fontSize: {
                 'xs': '0.75rem',

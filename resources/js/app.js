@@ -1,5 +1,8 @@
-import './bootstrap';
 import Alpine from 'alpinejs';
+import './bootstrap';
+
+// Importar componentes JavaScript
+import './header';
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -41,7 +44,7 @@ function initFormValidation() {
     document.querySelectorAll('form').forEach(form => {
         const password = form.querySelector('input[name="password"]');
         const confirmPassword = form.querySelector('input[name="password_confirmation"]');
-        
+
         if (password && confirmPassword) {
             const validatePassword = () => {
                 if (password.value !== confirmPassword.value) {
@@ -94,11 +97,11 @@ function showToast(message, type = 'success') {
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
         </div>
     `;
-    
+
     toastContainer.appendChild(toast);
     const bsToast = new bootstrap.Toast(toast);
     bsToast.show();
-    
+
     toast.addEventListener('hidden.bs.toast', () => {
         toast.remove();
     });
@@ -117,12 +120,12 @@ function initLoadingStates() {
     document.addEventListener('submit', function(e) {
         const form = e.target;
         const submitBtn = form.querySelector('button[type="submit"]');
-        
+
         if (submitBtn) {
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Procesando...';
             submitBtn.disabled = true;
-            
+
             setTimeout(() => {
                 if (!form.checkValidity()) {
                     submitBtn.innerHTML = originalText;
@@ -139,10 +142,10 @@ function initTableFilters() {
             const tableId = this.dataset.table;
             const table = document.getElementById(tableId);
             if (!table) return;
-            
+
             const searchValue = this.value.toLowerCase();
             const rows = table.querySelectorAll('tbody tr');
-            
+
             rows.forEach(row => {
                 const text = row.textContent.toLowerCase();
                 row.style.display = text.includes(searchValue) ? '' : 'none';
