@@ -1,4 +1,4 @@
-#  ETC Vallenas - Sistema de Gestión de Maquinaria Pesada
+#  ETC VALLENAS - Sistema de Gestión de Maquinaria Pesada
 
 <div align="center">
   <img src="https://thumbs.dreamstime.com/b/dise%C3%B1o-del-logotipo-de-construcci%C3%B3n-excavaci%C3%B3n-elemento-equipo-pesado-miner%C3%ADa-veh%C3%ADculos-transporte-389775260.jpg" alt="ETC Vallenas Logo" width="200"/>
@@ -55,7 +55,7 @@ Sistema integral de gestión para **ETC Vallenas**, empresa líder en alquiler d
 | Categoría | Tecnologías |
 |-----------|-------------|
 | **Backend** | Laravel 10, PHP 8.1+ |
-| **Base de Datos** | MongoDB 7.0+ |
+| **Base de Datos** | MySQL 7.0+ |
 | **Frontend** | Blade Templates, TailwindCSS 3, Bootstrap 5 |
 | **JavaScript** | Alpine.js, Chart.js |
 | **Build Tools** | Vite 5, PostCSS |
@@ -287,7 +287,7 @@ Este es un proyecto privado de **ETC Vallenas**. Para contribuir:
 
 ## Licencia
 
-**Propietario**: E.T.C Vallenas  
+**Propietario**: Fernando Alonso Vallenas Saraya
 **Copyright**: © 2025 E.T.C Vallenas - Todos los derechos reservados
 
 Este software es propiedad exclusiva de la empresa E.T.C Vallenas y está protegido por leyes de derechos de autor "Fernando Alonso Vallenas Saraya".
