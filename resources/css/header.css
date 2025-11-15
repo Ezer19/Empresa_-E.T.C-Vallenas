@@ -452,6 +452,16 @@
     visibility: visible;
 }
 
+/* Mostrar submenú cuando el elemento tenga la clase .open (usado por JS) */
+.dropdown-item.open .submenu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-item .submenu {
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
 .submenu li {
     display: block;
 }

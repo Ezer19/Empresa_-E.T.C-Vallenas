@@ -22,12 +22,39 @@ class SimpleHeaderController {
      * Dropdowns simples - solo hover en desktop
      */
     initDropdowns() {
-        // Los dropdowns funcionan solo con CSS hover en desktop
-        // En móvil se muestran siempre expandidos
-        if (window.innerWidth < 992) {
-            // En móvil, todos los submenús están visibles
-            return;
-        }
+        // Habilitar toggle por click/teclado para mejorar accesibilidad
+        // y para dispositivos táctiles que no soportan :hover correctamente.
+        this.dropdownItems.forEach((item) => {
+            const toggle = item.querySelector('.dropdown-toggle');
+            const submenu = item.querySelector('.submenu');
+            if (!toggle || !submenu) return;
+
+            // Click para abrir/cerrar
+            toggle.addEventListener('click', (e) => {
+                // Permitir enlaces normales si llevan a otra página
+                e.preventDefault();
+                item.classList.toggle('open');
+                const isOpen = item.classList.contains('open');
+                toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            // Soporte de teclado (Enter / Space)
+            toggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.classList.toggle('open');
+                    const isOpen = item.classList.contains('open');
+                    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                }
+            });
+        });
+
+        // Al cambiar el tamaño de ventana cerramos submenús abiertos cuando pasamos a desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 992) {
+                document.querySelectorAll('.dropdown-item.open').forEach((it) => it.classList.remove('open'));
+            }
+        });
     }
 
     /**
@@ -58,6 +85,8 @@ class SimpleHeaderController {
                 if (this.navbarCollapse.classList.contains('show')) {
                     this.navbarCollapse.classList.remove('show');
                 }
+                // Cerrar submenús abiertos
+                document.querySelectorAll('.dropdown-item.open').forEach((it) => it.classList.remove('open'));
             }
         });
     }
