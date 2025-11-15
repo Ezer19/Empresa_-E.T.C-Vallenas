@@ -680,6 +680,28 @@
     overflow: hidden;
 }
 
+/* Reglas de refuerzo: asegurar que el menú esté siempre visible en pantallas >= lg
+   Soluciona conflictos de especificidad con otras hojas compiladas. */
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+    }
+
+    .navbar-orange {
+        position: relative;
+        z-index: 1200;
+    }
+
+    .navbar-expand-lg .main-menu {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
 /* ====================================
    ACCESIBILIDAD
    ====================================*/
